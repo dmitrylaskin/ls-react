@@ -3,16 +3,10 @@ import './App.css';
 import Login from "./Components/Login/Login";
 import Profile from "./Components/Profile/Profile";
 import About from "./Components/About/About";
-import SignUpForm from "./Components/SignUpForm/SignUpForm";
 import Map from "./Components/Map/Map";
 
 
-const PAGES = {
-    login: <Login/>,
-    profile: <Profile/>,
-    about: <About/>,
-    map: <Map/>
-}
+
 
 class App extends React.Component {
 
@@ -22,10 +16,15 @@ class App extends React.Component {
 
         const navigateTo = (currentPage) => this.setState({currentPage})
 
+        const PAGES = {
+            login: <Login navigateTo={navigateTo}/>,
+            profile: <Profile/>,
+            about: <About/>,
+            map: <Map/>
+        }
 
         return (
             <>
-                <SignUpForm navigateTo={this.navigateTo}/>
                 <header>
                     <nav>
                         <ul>

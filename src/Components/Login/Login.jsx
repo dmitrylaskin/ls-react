@@ -8,6 +8,7 @@ class Login extends React.Component {
     }
     handleSubmit = (event) => {
         event.preventDefault()
+        this.props.navigateTo('map')
     }
     emailHandler = (event) => {
         this.setState({email: event.target.value})
@@ -24,7 +25,7 @@ class Login extends React.Component {
 
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="email">Email:</label>
-                    <input id="email" type="email" name="email" size="28" onChange={this.emailHandler} value={this.state.email} />
+                    <input id="email" type="text" name="email" size="28" onChange={this.emailHandler} value={this.state.email} />
 
                     <label htmlFor="password">Password:</label>
                     <input id="password" type="password" name="password" size="28" onChange={this.passwordHandler} value={this.state.password}/>
