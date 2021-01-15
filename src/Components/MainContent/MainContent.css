@@ -1,0 +1,8 @@
+.main-content {
+    background: url("../../assets/img/map.png") center center/cover no-repeat;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

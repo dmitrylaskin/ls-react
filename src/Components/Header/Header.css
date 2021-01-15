@@ -1,0 +1,29 @@
+.header {
+    height: 100px;
+    background-color: #1C1A19;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px 0 30px;
+
+}
+.navbar__list {
+    display: flex;
+}
+
+.navbar__list-item {
+    margin-right: 40px;
+}
+.navbar__list-item:last-child {
+    margin-right: 0;
+}
+.navbar__link {
+    color: #fff;
+}
+.navbar__link:hover {
+    color: #FDBF5A
+}
+.activeLink {
+    color: #FDBF5A
+}
