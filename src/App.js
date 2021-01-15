@@ -1,25 +1,52 @@
 import React from 'react';
 import './App.css';
-import Sidebar from "./Components/Sidebar/Sidebar";
-import MainContent from "./Components/MainContent/MainContent";
-import OrderPage from "./Components/OrderPage/OrderPage";
-import ProfilePage from "./Components/ProfilePage/ProfilePage";
-import {Route, Switch} from "react-router-dom";
-import LoginPage from "./Components/LoginPage/LoginPage";
+import Home from "./Components/Home/Home";
+import Profile from "./Components/Profile/Profile";
+import About from "./Components/About/About";
 
-function App() {
-  return (
-      <div className="wrapper">
-          {/*<Sidebar/>*/}
-          {/*<MainContent/>*/}
-          <Switch>
-              <Route path='/profile' component={ProfilePage}/>
-              <Route path='/map' component={OrderPage}/>
-              <Route path='/login' component={LoginPage}/>
-          </Switch>
-      </div>
 
-  );
+let PAGES = {
+    home: <Home/>,
+    profile: <Profile/>,
+    about: <About/>
+}
+
+class App extends React.Component {
+
+    state = ({currentPage: 'home'})
+
+    render() {
+
+        let navigateTo = (page) => {
+            this.setState({currentPage: page})
+        }
+
+        return (
+            <>
+                <header>
+                    <nav>
+                        <ul>
+                            <li>
+                                <button onClick={() => navigateTo('home')}>Home</button>
+                            </li>
+                            <li>
+                                <button onClick={() => navigateTo('profile')}>Profile</button>
+                            </li>
+                            <li>
+                                <button onClick={() => navigateTo('about')}>About</button>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+
+                <main>
+                    <section>
+                        {PAGES[this.state.currentPage]}
+                    </section>
+                </main>
+            </>
+        );
+    }
 }
 
 export default App;
