@@ -10,12 +10,9 @@ class Login extends React.Component {
         event.preventDefault()
         this.props.navigateTo('map')
     }
-    emailHandler = (event) => {
-        this.setState({email: event.target.value})
-    }
-    passwordHandler = (event) => {
-        this.setState({password: event.target.value})
-    }
+
+    inputHandler = (field) =>
+        (event) => this.setState({[field]: event.target.value})
 
     render() {
 
@@ -25,10 +22,10 @@ class Login extends React.Component {
 
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="email">Email:</label>
-                    <input id="email" type="text" name="email" size="28" onChange={this.emailHandler} value={this.state.email} />
+                    <input id="email" type="text" name="email" size="28" onChange={this.inputHandler('email')} value={this.state.email} />
 
                     <label htmlFor="password">Password:</label>
-                    <input id="password" type="password" name="password" size="28" onChange={this.passwordHandler} value={this.state.password}/>
+                    <input id="password" type="password" name="password" size="28" onChange={this.inputHandler('password')} value={this.state.password}/>
 
                     <input type="submit" value="Log in"/>
                 </form>
