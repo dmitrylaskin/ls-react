@@ -12,16 +12,18 @@ class App extends React.Component {
 
     state = ({currentPage: 'home'})
 
+    navigateTo = (currentPage) => this.setState({currentPage})
+
+    PAGES = {
+        login: <Login navigateTo={this.navigateTo}/>,
+        profile: <Profile/>,
+        about: <About/>,
+        map: <Map/>
+    }
+
+
+
     render() {
-
-        const navigateTo = (currentPage) => this.setState({currentPage})
-
-        const PAGES = {
-            login: <Login navigateTo={navigateTo}/>,
-            profile: <Profile/>,
-            about: <About/>,
-            map: <Map/>
-        }
 
         return (
             <>
@@ -29,13 +31,13 @@ class App extends React.Component {
                     <nav>
                         <ul>
                             <li>
-                                <button onClick={() => navigateTo('login')}>Login</button>
+                                <button onClick={() => this.navigateTo('login')}>Login</button>
                             </li>
                             <li>
-                                <button onClick={() => navigateTo('profile')}>Profile</button>
+                                <button onClick={() => this.navigateTo('profile')}>Profile</button>
                             </li>
                             <li>
-                                <button onClick={() => navigateTo('about')}>About</button>
+                                <button onClick={() => this.navigateTo('about')}>About</button>
                             </li>
                         </ul>
                     </nav>
@@ -43,7 +45,7 @@ class App extends React.Component {
 
                 <main>
                     <section>
-                        {PAGES[this.state.currentPage]}
+                        {this.PAGES[this.state.currentPage]}
                     </section>
                 </main>
             </>
