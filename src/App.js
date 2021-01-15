@@ -1,14 +1,17 @@
 import React from 'react';
 import './App.css';
-import Home from "./Components/Home/Home";
+import Login from "./Components/Login/Login";
 import Profile from "./Components/Profile/Profile";
 import About from "./Components/About/About";
+import SignUpForm from "./Components/SignUpForm/SignUpForm";
+import Map from "./Components/Map/Map";
 
 
-let PAGES = {
-    home: <Home/>,
+const PAGES = {
+    login: <Login/>,
     profile: <Profile/>,
-    about: <About/>
+    about: <About/>,
+    map: <Map/>
 }
 
 class App extends React.Component {
@@ -17,17 +20,17 @@ class App extends React.Component {
 
     render() {
 
-        let navigateTo = (page) => {
-            this.setState({currentPage: page})
-        }
+        const navigateTo = (currentPage) => this.setState({currentPage})
+
 
         return (
             <>
+                <SignUpForm navigateTo={this.navigateTo}/>
                 <header>
                     <nav>
                         <ul>
                             <li>
-                                <button onClick={() => navigateTo('home')}>Home</button>
+                                <button onClick={() => navigateTo('login')}>Login</button>
                             </li>
                             <li>
                                 <button onClick={() => navigateTo('profile')}>Profile</button>
