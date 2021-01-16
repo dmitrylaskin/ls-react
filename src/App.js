@@ -1,25 +1,29 @@
 import React from 'react';
 import './App.css';
-import Home from "./Components/Home/Home";
+import Login from "./Components/Login/Login";
 import Profile from "./Components/Profile/Profile";
 import About from "./Components/About/About";
+import Map from "./Components/Map/Map";
 
 
-let PAGES = {
-    home: <Home/>,
-    profile: <Profile/>,
-    about: <About/>
-}
+
 
 class App extends React.Component {
 
     state = ({currentPage: 'home'})
 
-    render() {
+    navigateTo = (currentPage) => this.setState({currentPage})
 
-        let navigateTo = (page) => {
-            this.setState({currentPage: page})
-        }
+    PAGES = {
+        login: <Login navigateTo={this.navigateTo}/>,
+        profile: <Profile/>,
+        about: <About/>,
+        map: <Map/>
+    }
+
+
+
+    render() {
 
         return (
             <>
@@ -27,13 +31,13 @@ class App extends React.Component {
                     <nav>
                         <ul>
                             <li>
-                                <button onClick={() => navigateTo('home')}>Home</button>
+                                <button onClick={() => this.navigateTo('login')}>Login</button>
                             </li>
                             <li>
-                                <button onClick={() => navigateTo('profile')}>Profile</button>
+                                <button onClick={() => this.navigateTo('profile')}>Profile</button>
                             </li>
                             <li>
-                                <button onClick={() => navigateTo('about')}>About</button>
+                                <button onClick={() => this.navigateTo('about')}>About</button>
                             </li>
                         </ul>
                     </nav>
@@ -41,7 +45,7 @@ class App extends React.Component {
 
                 <main>
                     <section>
-                        {PAGES[this.state.currentPage]}
+                        {this.PAGES[this.state.currentPage]}
                     </section>
                 </main>
             </>
