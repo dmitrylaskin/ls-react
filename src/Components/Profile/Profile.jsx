@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
-const Profile = () => {
+const Profile = (props) => {
     return (
-        <div>Profile</div>
+        <div>{props.text}</div>
     );
 };
+
+Profile.propTypes = {
+    text: PropTypes.string
+}
 
 export default Profile;
