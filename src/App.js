@@ -4,6 +4,8 @@ import Login from "./Components/Login/Login";
 import Profile from "./Components/Profile/Profile";
 import About from "./Components/About/About";
 import Map from "./Components/Map/Map";
+import Header from "./Components/Header/Header";
+
 
 
 
@@ -27,24 +29,10 @@ class App extends React.Component {
 
         return (
             <>
-                <header>
-                    <nav>
-                        <ul>
-                            <li>
-                                <button onClick={() => this.navigateTo('login')}>Login</button>
-                            </li>
-                            <li>
-                                <button onClick={() => this.navigateTo('profile')}>Profile</button>
-                            </li>
-                            <li>
-                                <button onClick={() => this.navigateTo('about')}>About</button>
-                            </li>
-                        </ul>
-                    </nav>
-                </header>
+                <Header navigateTo={this.navigateTo}/>
 
                 <main>
-                    <section>
+                    <section style={{padding: '20px'}}>
                         {this.PAGES[this.state.currentPage]}
                     </section>
                 </main>
