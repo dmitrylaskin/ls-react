@@ -1,25 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {MyContext} from "../../App";
 
 
-class About extends React.Component {
-    static propTypes = {
-        text: PropTypes.string
-    }
-    render() {
 
+const About = (props) => {
         return (
-            <MyContext.Consumer>
-                {(logObj) => {
-                    <div>{logObj.logIn()}</div>
-                }}
-            </MyContext.Consumer>
-
+            <div>Signed out</div>
         );
-    }
 }
 
-
+About.propTypes = {
+    text: PropTypes.string
+}
 
 export default About;

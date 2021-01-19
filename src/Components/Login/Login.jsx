@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import PropTypes from 'prop-types'
+import {MyContext} from "../../App";
 
 class Login extends React.Component {
     static propTypes = {
@@ -16,7 +17,6 @@ class Login extends React.Component {
         event.preventDefault()
         this.props.navigateTo('map')
 
-        console.log(this.state.email)
     }
 
     inputHandler = (field) => {
@@ -26,20 +26,23 @@ class Login extends React.Component {
     render() {
 
         return (
+        <MyContext.Consumer>
+            {value => {
 
-                <form onSubmit={this.handleSubmit}>
-                    {/*<label htmlFor="email">Email:</label>*/}
-                    {/*<input id="email" type="text" name="email" size="28" />*/}
-                    <TextField name="email" id="email" label="email" onChange={this.inputHandler('email')} value={this.state.email} />
-                    <TextField id="password" label="password" onChange={this.inputHandler('password')} value={this.state.password} />
+                return <form onSubmit={this.handleSubmit}>
+                        <TextField name="email" id="email" label="email" onChange={this.inputHandler('email')} value={this.state.email} />
+                        <TextField id="password" label="password" onChange={this.inputHandler('password')} value={this.state.password} />
+                        <Button variant="contained" onClick={() => value.logIn(this.state.email, this.state.password)} type="submit">Button</Button>
 
-                    {/*<label htmlFor="password">Password:</label>*/}
-                    {/*<input id="password" type="password" name="password" size="28" onChange={this.inputHandler('password')} value={this.state.password}/>*/}
-
-                    {/*<input type="submit" value="Log in"/>*/}
-                    <Button variant="contained" type="submit">Button</Button>
+                        {/*<label htmlFor="email">Email:</label>*/}
+                        {/*<input id="email" type="text" name="email" size="28" />*/}
+                        {/*<label htmlFor="password">Password:</label>*/}
+                        {/*<input id="password" type="password" name="password" size="28" onChange={this.inputHandler('password')} value={this.state.password}/>*/}
+                        {/*<input type="submit" value="Log in"/>*/}
                 </form>
+            }}
 
+        </MyContext.Consumer>
         );
     }
 }

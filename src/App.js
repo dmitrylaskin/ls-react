@@ -6,17 +6,22 @@ import About from "./Components/About/About";
 import Map from "./Components/Map/Map";
 import Header from "./Components/Header/Header";
 
-export const MyContext = React.createContext(null)
-
-
+export const MyContext = React.createContext()
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentPage: 'home',
+            email: '',
+            password: '',
+            isLoggedIn: false
+        }
+    }
 
-    state = {
-        currentPage: 'home',
-        email: '',
-        password: '',
-        isLoggedIn: false
+
+    getState() {
+        return this.state
     }
 
     navigateTo = (currentPage) => this.setState({currentPage})
@@ -28,25 +33,31 @@ class App extends React.Component {
         map: <Map/>
     }
 
-    logObj = {
-        logIn(email, password) {
-            console.log('log in')
-            this.setState({
-                email: email,
-                password: password,
-                isLoggedIn: false
-            })
-        },
-        logOut() {
-            console.log('log out')
-            this.setState({isLoggedIn: false})
-        }
+    logIn = (email, password) => {
+        this.setState({email, password, isLoggedIn: true})
+        console.log('logIn state: ', this.state)
+
     }
+    logOut = () => {
+        this.setState({
+            email: '',
+            password: '',
+            isLoggedIn: false
+        })
+    }
+
 
     render() {
 
+        console.log(this.getState())
+
         return (
-            <MyContext.Provider value={this.logObj}>
+
+            <MyContext.Provider value={{
+                logIn:this.logIn,
+                logOut:this.logOut,
+                isLoggedIn:this.state.isLoggedIn
+            }}>
                 <>
                     <Header navigateTo={this.navigateTo}/>
 
