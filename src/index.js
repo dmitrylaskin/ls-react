@@ -4,17 +4,21 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Router} from "react-router-dom";
-import { theme } from "loft-taxi-mui-theme"; // Импортируем саму тему
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import {theme} from "loft-taxi-mui-theme"; // Импортируем саму тему
+import {MuiThemeProvider} from "@material-ui/core/styles";
+import {AuthProvider} from "./Components/HOCs/withAuth";
 
 ReactDOM.render(
+    <React.StrictMode>
+        <AuthProvider>
 
-      <React.StrictMode>
-          <MuiThemeProvider theme={theme}>
-            <App />
-          </MuiThemeProvider>
-      </React.StrictMode>,
-  document.getElementById('root')
+            <MuiThemeProvider theme={theme}>
+                <App/>
+            </MuiThemeProvider>
+
+        </AuthProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -4,7 +4,7 @@ import App from "./App";
 
 jest.mock('./Components/Home/Home', () => ({Home: () => <div>Home component</div>}))
 jest.mock('./Components/Profile/Profile', () => ({Profile: () => <div>Profile component</div>}))
-jest.mock('./Components/About/About', () => ({About: () => <div>About component</div>}))
+jest.mock('./Components/Map/Map', () => ({Map: () => <div>Map component</div>}))
 
 describe('App', () => {
     it('renders correctly', () => {
@@ -16,8 +16,8 @@ describe('App', () => {
         it('corresponding page is opened', () => {
             const {getByText, container} = render(<App/>)
 
-            fireEvent.click(getByText('About'))
-            expect(container.innerHTML).toMatch('About component')
+            fireEvent.click(getByText('Map'))
+            expect(container.innerHTML).toMatch('Map component')
             fireEvent.click(getByText('Profile'))
             expect(container.innerHTML).toMatch('Profile component')
         })

@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Login from "./Components/Login/Login";
+import Home from "./Components/Home/Home";
 import Profile from "./Components/Profile/Profile";
-import About from "./Components/About/About";
-import Map from "./Components/Map/Map";
 import Header from "./Components/Header/Header";
+import Map from "./Components/Map/Map";
+import {withAuth} from "./Components/HOCs/withAuth";
 
 export const MyContext = React.createContext()
 
@@ -12,10 +12,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: 'home',
-            email: '',
-            password: '',
-            isLoggedIn: false
+            currentPage: 'home'
         }
     }
 
@@ -24,52 +21,38 @@ class App extends React.Component {
         return this.state
     }
 
-    navigateTo = (currentPage) => this.setState({currentPage})
-
-    PAGES = {
-        login: <Login navigateTo={this.navigateTo}/>,
-        profile: <Profile text={'Profile'}/>,
-        about: <About text={'About'}/>,
-        map: <Map/>
+    navigateTo = (currentPage) => {
+        if (this.props.IsLoggedIn) {
+            this.setState({currentPage})
+        } else {
+            this.setState({currentPage: 'home'})
+        }
     }
-
-    logIn = (email, password) => {
-        this.setState({email, password, isLoggedIn: true})
-        console.log('logIn state: ', this.state)
-
-    }
-    logOut = () => {
-        this.setState({
-            email: '',
-            password: '',
-            isLoggedIn: false
-        })
-    }
-
 
     render() {
+        const PAGES = {
+            home: (props) => <Home {...props}/>,
+            profile: (props) => <Profile {...props} />,
+            map: (props) => <Map {...props}/>
+        }
 
-        console.log(this.getState())
+        console.log('App-state: ', this.getState())
+        console.log('App-props: ', this.props)
 
         return (
-
-            <MyContext.Provider value={{
-                logIn:this.logIn,
-                logOut:this.logOut,
-                isLoggedIn:this.state.isLoggedIn
-            }}>
                 <>
-                    <Header navigateTo={this.navigateTo}/>
+                    <Header navigateTo={this.navigateTo} isLoggedIn={this.state.isLoggedIn}/>
 
                     <main>
                         <section style={{padding: '20px'}}>
-                            {this.PAGES[this.state.currentPage]}
+                            {PAGES[this.state.currentPage]({navigateTo: this.navigateTo})}
+
                         </section>
                     </main>
                 </>
-            </MyContext.Provider>
+
         );
     }
 }
 
-export default App;
+export default withAuth(App);

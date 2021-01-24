@@ -7,20 +7,10 @@ import Button from "@material-ui/core/Button";
 import Logo from '../../assets/img/header_logo.png'
 import {MyContext} from "../../App";
 import PropTypes from "prop-types";
-import About from "../About/About";
 
 
 const Header = (props) => {
 
-
-
-    return (
-        <MyContext>
-            {value => {
-                const signOutHandler = () => {
-                    props.navigateTo('about')
-                    value.logOut()
-                }
                 return <AppBar position="static" color="default">
                             <Toolbar>
                                 <IconButton edge="start" color="inherit" aria-label="menu">
@@ -30,16 +20,12 @@ const Header = (props) => {
 
                                 <img src={Logo} alt=""/>
 
-                                <Button onClick={() => props.navigateTo('login')} color="inherit">Login</Button>
+                                <Button onClick={() => props.navigateTo('home')} color="inherit">Home</Button>
                                 <Button onClick={() => props.navigateTo('profile')} color="inherit">Profile</Button>
-                                <Button onClick={signOutHandler} color="inherit">Sign out</Button>
+                                <Button onClick={() => props.navigateTo('map')} color="inherit">Map</Button>
                             </Toolbar>
                         </AppBar>
-            }}
-        </MyContext>
 
-
-    );
 };
 
 Header.propTypes = {
