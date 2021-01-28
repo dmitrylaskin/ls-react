@@ -7,16 +7,20 @@ import {BrowserRouter, Router} from "react-router-dom";
 import {theme} from "loft-taxi-mui-theme"; // Импортируем саму тему
 import {MuiThemeProvider} from "@material-ui/core/styles";
 import {AuthProvider} from "./Components/HOCs/withAuth";
+import {Provider} from "react-redux";
+import store from "./Components/Redux/redux-store";
 
 ReactDOM.render(
     <React.StrictMode>
-        <AuthProvider>
-
-            <MuiThemeProvider theme={theme}>
-                <App/>
-            </MuiThemeProvider>
-
-        </AuthProvider>
+        <BrowserRouter>
+            <Provider store={store}>
+            <AuthProvider>
+                <MuiThemeProvider theme={theme}>
+                    <App/>
+                </MuiThemeProvider>
+            </AuthProvider>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );

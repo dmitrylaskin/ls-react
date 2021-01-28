@@ -1,4 +1,8 @@
 import React from 'react';
+import {loginFormToggle} from "../Redux/auth-reducer";
+import {authAPI} from "../../Api/api";
+const axios = require('axios');
+
 
 class SignUpForm extends React.Component {
 
@@ -13,20 +17,21 @@ class SignUpForm extends React.Component {
 
 
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault()
-        // console.log(event.target.email.value)
-        // console.log(event.target.name.value)
-        console.log(this.state)
+        let {email, name, password, surname} = event.target
+        let response = await authAPI.getSignUp(email, password, name, surname)
+        console.log(response)
     }
 
     render() {
 
 
         return (
+            <>
             <form onSubmit={this.handleSubmit}>
                 <label htmlFor="email">Email:</label>
-                <input id="email" type="email" name="email" size="28" value={this.state.email} onChange={this.inputHandler('email')}/>
+                <input id="email" type="text" name="email" size="28" value={this.state.email} onChange={this.inputHandler('email')}/>
 
                 <label htmlFor="name">Name:</label>
                 <input id="name" type="text" name="name" size="28" value={this.state.name} onChange={this.inputHandler('name')}/>
@@ -36,6 +41,9 @@ class SignUpForm extends React.Component {
 
                 <input type="submit" value="Sign up"/>
             </form>
+                <hr/>
+                <button onClick={() => this.props.loginFormToggle(false)}>Sign In</button>
+            </>
         );
     }
 }

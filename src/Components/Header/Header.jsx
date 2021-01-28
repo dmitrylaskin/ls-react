@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Logo from '../../assets/img/header_logo.png'
 import {MyContext} from "../../App";
 import PropTypes from "prop-types";
+import {NavLink} from "react-router-dom";
 
 
 const Header = (props) => {
@@ -20,9 +21,13 @@ const Header = (props) => {
 
                                 <img src={Logo} alt=""/>
 
-                                <Button onClick={() => props.navigateTo('home')} color="inherit">Home</Button>
-                                <Button onClick={() => props.navigateTo('profile')} color="inherit">Profile</Button>
-                                <Button onClick={() => props.navigateTo('map')} color="inherit">Map</Button>
+                                <NavLink activeStyle={{color:'red'}} to={'/home'}><button>home</button></NavLink>
+                                <NavLink activeStyle={{color:'red'}} to={'/profile'}><button>profile</button></NavLink>
+                                <NavLink activeStyle={{color:'red'}} to={'/map'}><button>map</button></NavLink>
+
+                                {/*<Button onClick={() => props.navigateTo('home')} color="inherit">Home</Button>*/}
+                                {/*<Button onClick={() => props.navigateTo('profile')} color="inherit">Profile</Button>*/}
+                                {/*<Button onClick={() => props.navigateTo('map')} color="inherit">Map</Button>*/}
                             </Toolbar>
                         </AppBar>
 

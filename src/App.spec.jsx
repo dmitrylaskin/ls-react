@@ -2,9 +2,9 @@ import React from 'react'
 import {render, fireEvent} from "@testing-library/react";
 import App from "./App";
 
-jest.mock('./Components/Home/Home', () => ({Home: () => <div>Home component</div>}))
-jest.mock('./Components/Profile/Profile', () => ({Profile: () => <div>Profile component</div>}))
-jest.mock('./Components/Map/Map', () => ({Map: () => <div>Map component</div>}))
+jest.mock('./Components/Home/Home', () => () => <div>Home component</div>)
+jest.mock('./Components/Profile/Profile', () => () => <div>Profile component</div>)
+jest.mock('./Components/Map/Map', () => () => <div>Map component</div>)
 
 describe('App', () => {
     it('renders correctly', () => {

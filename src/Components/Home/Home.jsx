@@ -1,20 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import {withAuth} from "../HOCs/withAuth";
+import {NavLink} from "react-router-dom";
+import {authAPI} from "../../Api/api";
+import {connect} from "react-redux";
+import {compose} from "redux";
+import {getLoginThunkCreator, loginFormToggle, showLoader} from "../Redux/auth-reducer";
+import LoginForm from "../LoginForm/LoginForm";
+import SignUpForm from "../SignUpForm/SignUpForm";
+
 
 class Home extends React.Component {
     static propTypes = {
         navigateTo: PropTypes.func
     }
 
-    handleSubmit = (event) => {
-
+    handleSubmit = async (event) => {
         event.preventDefault()
-        //this.props.navigateTo('map')
-        const {email, password} = event.target
-        console.log('Email, Pass: ', email.value, password.value)
-        this.props.logIn(email.value, password.value)
 
+        const {email, password} = event.target
+
+        this.props.getLoginThunkCreator(email, password, this.props.logIn)
 
     }
 
@@ -22,30 +28,35 @@ class Home extends React.Component {
         return (event) => this.setState({[field]: event.target.value})
     }
 
-    goToProfile = () => {
-        this.props.navigateTo('profile')
-    }
+
 
 
     render() {
-        console.log('Home: ', this.props)
-
         return (<>
-                {this.props.IsLoggedIn
-                    ? (<p>You are logged in <button onClick={this.goToProfile}>go to Profile</button></p>)
-                    : <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="email">Email:</label>
-                        <input id="email" type="text" name="email" size="28" />
-                        <label htmlFor="password">Password:</label>
-                        <input id="password" type="password" name="password" size="28" />
-                        <input type="submit" value="Log in"/>
-                </form>}
-
-
+                {this.props.showSignUpForm
+                    ? <SignUpForm loginFormToggle={this.props.loginFormToggle}/>
+                    : this.props.isLoading
+                        ? <div>Loading...</div>
+                        : this.props.isAouthorized
+                            ? (<p>You are logged in <NavLink to={'/profile'}><button type='button'>go to Profile</button></NavLink></p>)
+                            : <LoginForm loginFormToggle={this.props.loginFormToggle} handleSubmit={this.handleSubmit}/>}
             </>
         );
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        isLoading: state.auth.isLoading,
+        showSignUpForm: state.auth.showSignUpForm,
+        isAouthorized: state.auth.isAouthorized
+    }
+}
+
+let Compose = compose(
+    connect(mapStateToProps, {showLoader,loginFormToggle, getLoginThunkCreator}),
+    withAuth
+)(Home)
+
 //export const HomeWithAuth = withAuth(Home)
-export default withAuth(Home);
+export default Compose

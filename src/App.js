@@ -5,54 +5,58 @@ import Profile from "./Components/Profile/Profile";
 import Header from "./Components/Header/Header";
 import Map from "./Components/Map/Map";
 import {withAuth} from "./Components/HOCs/withAuth";
+import {Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
+import {compose} from "redux";
+import {setCurrentPage} from "./Components/Redux/app-reducer";
+import Myxhr from "./Components/Header/Myxhr";
 
 export const MyContext = React.createContext()
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentPage: 'home'
-        }
-    }
-
 
     getState() {
         return this.state
     }
 
-    navigateTo = (currentPage) => {
-        if (this.props.IsLoggedIn) {
-            this.setState({currentPage})
-        } else {
-            this.setState({currentPage: 'home'})
-        }
-    }
+    // navigateTo = (currentPage) => {
+    //     if (this.props.IsLoggedIn) {
+    //         setCurrentPage(currentPage)
+    //     } else {
+    //         setCurrentPage('home')
+    //     }
+    // }
 
     render() {
-        const PAGES = {
-            home: (props) => <Home {...props}/>,
-            profile: (props) => <Profile {...props} />,
-            map: (props) => <Map {...props}/>
-        }
-
-        console.log('App-state: ', this.getState())
-        console.log('App-props: ', this.props)
-
         return (
                 <>
-                    <Header navigateTo={this.navigateTo} isLoggedIn={this.state.isLoggedIn}/>
+                    <Header />
 
                     <main>
                         <section style={{padding: '20px'}}>
-                            {PAGES[this.state.currentPage]({navigateTo: this.navigateTo})}
+                            <Switch>
+                                <Route path='/home' render={() => <Home {...this.props}/>}/>
+                                <Route path='/profile' render={() => <Profile {...this.props}/>}/>
+                                <Route path='/map' render={() => <Map {...this.props}/>}/>
+
+                            </Switch>
+
+                            {/*{PAGES[this.state.currentPage]({navigateTo: this.navigateTo})}*/}
 
                         </section>
+                        <Myxhr/>
                     </main>
                 </>
 
         );
     }
 }
+const mapStateToProps = (state) => {
 
-export default withAuth(App);
+    return {app: state.app.currentPage}
+}
+let Compose = compose(
+    connect(mapStateToProps, {setCurrentPage}),
+    withAuth
+)(App)
+export default Compose;

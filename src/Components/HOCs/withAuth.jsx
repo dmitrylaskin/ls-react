@@ -9,7 +9,7 @@ export const AuthProvider = (props) => {
 
     const logIn = (email, password) => {
 
-        if (email !== 'mail' || password !== 'pass') {
+        if (email !== 'email@example.com' || password !== 'password') {
             return
         }
         SetIsLoggedIn(true)

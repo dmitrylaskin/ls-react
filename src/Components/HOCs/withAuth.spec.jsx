@@ -1,32 +1,35 @@
 import React from "react";
 import {AuthProvider, AuthContext} from "./withAuth";
-import {render} from "@testing-library/react";
 import {act} from "@testing-library/react";
+import {render, fireEvent, screen} from "@testing-library/react";
+
 
 describe('AuthContext', () => {
     describe('#logIn', () => {
         it('sets isLoggedIt to false', () => {
-            let isLoggedIn;
-            let logIn;
+
 
             render(
                 <AuthProvider>
                     <AuthContext.Consumer>
-                        {(value) => {
-                            isLoggedIn = value.isLoggedIn;
-                            logIn = value.logIn;
-                            return null
-
-                        }}
+                        {(value) => (
+                            <>
+                           <span data-testid='is-logged-in'>
+                               {String(value.IsLoggedIn)}
+                           </span>
+                                <button data-testid='login' onClick={() => value.logIn('mail', 'pass')}>login</button>
+                            </>
+                        )}
                     </AuthContext.Consumer>
                 </AuthProvider>
             )
 
-            expect(isLoggedIn).toBe(false)
-            act(() => {
-                logIn('mail', 'pass')
-            })
-            expect(isLoggedIn).toBe(true)
+            expect(screen.getByTestId('is-logged-in')).toHaveTextContent('false')
+
+            const loginButton = screen.getByTestId('login')
+            fireEvent.click(loginButton)
+
+            expect(screen.getByTestId('is-logged-in')).toHaveTextContent('true')
 
         })
     })
