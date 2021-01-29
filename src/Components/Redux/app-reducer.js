@@ -1,6 +1,6 @@
-let SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+export let SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
-let initialState = {currentPage: 'home'}
+export let initialState = {currentPage: 'home'}
 
 const appReducer = (state=initialState, action) => {
     switch (action.type) {

@@ -1,19 +1,20 @@
 import {authAPI} from "../../Api/api";
 
-const IS_LOADING = 'IS_LOADING'
-const SHOW_SIGNUP_FORM = 'SHOW_SIGNUP_FORM'
-const IS_AUTHORIZED = 'LOGINED_SUCCESSFULLY'
-const SET_USER_DATA = 'SET_USER_DATA'
-const GET_LOGOUT = 'GET_LOGOUT'
+export const IS_LOADING = 'IS_LOADING'
+export const SHOW_SIGNUP_FORM = 'SHOW_SIGNUP_FORM'
+export const IS_AUTHORIZED = 'LOGINED_SUCCESSFULLY'
+export const SET_USER_DATA = 'SET_USER_DATA'
+export const GET_LOGOUT = 'GET_LOGOUT'
 
-let initialState = {
+export let initialState = {
     isLoading: false,
     showSignUpForm: false,
     isAouthorized: false,
     email: null,
     password: null
 }
-const authReducer = (state=initialState, action) => {
+export const authReducer = (state=initialState, action) => {
+    debugger
 
     switch (action.type) {
         case IS_LOADING:
@@ -36,7 +37,7 @@ const authReducer = (state=initialState, action) => {
                 ...state,
                 isAouthorized: action.payload.isAuth,
                 email: action.payload.email,
-                name: action.payload.name
+                password: action.payload.password
             }
         case GET_LOGOUT:
             return {

@@ -1,6 +1,6 @@
-const SET_PAYMENT_DATA = 'SET_PAYMENT_DATA'
+export const SET_PAYMENT_DATA = 'SET_PAYMENT_DATA'
 
-let initialState = {
+export let initialState = {
     name: 'Corben Dallas',
     month: '01/07',
     cardNumber: '1234 1234 1234 1234',

@@ -9,23 +9,12 @@ import {Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {setCurrentPage} from "./Components/Redux/app-reducer";
-import Myxhr from "./Components/Header/Myxhr";
 
 export const MyContext = React.createContext()
 
 class App extends React.Component {
 
-    getState() {
-        return this.state
-    }
 
-    // navigateTo = (currentPage) => {
-    //     if (this.props.IsLoggedIn) {
-    //         setCurrentPage(currentPage)
-    //     } else {
-    //         setCurrentPage('home')
-    //     }
-    // }
 
     render() {
         return (
@@ -44,7 +33,7 @@ class App extends React.Component {
                             {/*{PAGES[this.state.currentPage]({navigateTo: this.navigateTo})}*/}
 
                         </section>
-                        <Myxhr/>
+
                     </main>
                 </>
 
