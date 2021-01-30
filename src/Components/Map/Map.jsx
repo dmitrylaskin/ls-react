@@ -2,6 +2,7 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import './Map.css'
 import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 
 
 class Map extends React.Component {
@@ -37,6 +38,7 @@ class Map extends React.Component {
     render() {
 
         return (
+            !this.props.isLoggedIn ? <Redirect to={'home'}/> :
             <div className='map-wrapper'>
                 <div className='map' data-testid='map' ref={this.myRef}>
 
@@ -46,5 +48,10 @@ class Map extends React.Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+    return  {
+        isLoggedIn: state.auth.isLoggedIn
+    }
+}
 
-export default Map;
+export default connect(mapStateToProps, {})(Map);

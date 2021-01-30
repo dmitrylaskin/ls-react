@@ -5,7 +5,7 @@ import Profile from "./Components/Profile/Profile";
 import Header from "./Components/Header/Header";
 import Map from "./Components/Map/Map";
 import {withAuth} from "./Components/HOCs/withAuth";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {setCurrentPage} from "./Components/Redux/app-reducer";
@@ -24,10 +24,11 @@ class App extends React.Component {
                     <main>
                         <section style={{padding: '20px'}}>
                             <Switch>
+                                <Route exact path='/' render={() => <Redirect to={'/home'} /> }/>
                                 <Route path='/home' render={() => <Home {...this.props}/>}/>
                                 <Route path='/profile' render={() => <Profile {...this.props}/>}/>
                                 <Route path='/map' render={() => <Map {...this.props}/>}/>
-
+                                <Route path='*' render={() => <div><b>404 NOT FOUND</b></div> }/>
                             </Switch>
 
                             {/*{PAGES[this.state.currentPage]({navigateTo: this.navigateTo})}*/}

@@ -5,7 +5,13 @@ import {NavLink} from "react-router-dom";
 import {authAPI} from "../../Api/api";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {getLoginThunkCreator, loginFormToggle, showLoader} from "../Redux/auth-reducer";
+import {
+    authenticate,
+    AUTHENTICATE,
+    getLoginThunkCreator,
+    loginFormToggle,
+    showLoader
+} from "../Redux/auth-reducer";
 import LoginForm from "../LoginForm/LoginForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
 
@@ -20,7 +26,8 @@ class Home extends React.Component {
 
         const {email, password} = event.target
 
-        this.props.getLoginThunkCreator(email, password, this.props.logIn)
+        this.props.authenticate(email.value, password.value)
+        //this.props.getLoginThunkCreator(email, password, this.props.logIn)
 
     }
 
@@ -32,12 +39,13 @@ class Home extends React.Component {
 
 
     render() {
+
         return (<>
                 {this.props.showSignUpForm
                     ? <SignUpForm loginFormToggle={this.props.loginFormToggle}/>
                     : this.props.isLoading
                         ? <div>Loading...</div>
-                        : this.props.isAouthorized
+                        : this.props.isLoggedIn
                             ? (<p>You are logged in <NavLink to={'/profile'}><button type='button'>go to Profile</button></NavLink></p>)
                             : <LoginForm loginFormToggle={this.props.loginFormToggle} handleSubmit={this.handleSubmit}/>}
             </>
@@ -49,13 +57,12 @@ const mapStateToProps = (state) => {
     return {
         isLoading: state.auth.isLoading,
         showSignUpForm: state.auth.showSignUpForm,
-        isAouthorized: state.auth.isAouthorized
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 
 let Compose = compose(
-    connect(mapStateToProps, {showLoader,loginFormToggle, getLoginThunkCreator}),
-    withAuth
+    connect(mapStateToProps, {showLoader,loginFormToggle, authenticate})
 )(Home)
 
 //export const HomeWithAuth = withAuth(Home)

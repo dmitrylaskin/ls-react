@@ -2,7 +2,7 @@ import authReducer, {
     GET_LOGOUT,
     initialState,
     IS_AUTHORIZED,
-    IS_LOADING,
+    IS_LOADING, LOG_IN, LOG_OUT,
     SET_USER_DATA,
     SHOW_SIGNUP_FORM
 } from "./auth-reducer";
@@ -15,7 +15,7 @@ describe("auth reducer", () => {
         expect(result).toEqual({
             isLoading: true,
             showSignUpForm: false,
-            isAouthorized: false,
+            isLoggedIn: false,
             email: null,
             password: null
         })
@@ -30,7 +30,7 @@ describe('auth reducer', () => {
         expect(result).toEqual({
             isLoading: false,
             showSignUpForm: false,
-            isAouthorized: false,
+            isLoggedIn: false,
             email: null,
             password: null
         })
@@ -40,13 +40,13 @@ describe('auth reducer', () => {
 describe('auth reducer', () => {
     it('Авторизует пользователя', () => {
         const result = authReducer(initialState, {
-            type: IS_AUTHORIZED,
+            type: LOG_IN,
             payload: true
         })
         expect(result).toEqual({
             isLoading: false,
             showSignUpForm: false,
-            isAouthorized: true,
+            isLoggedIn: true,
             email: null,
             password: null
         })
@@ -54,37 +54,18 @@ describe('auth reducer', () => {
     })
 })
 //будет удалено
-describe('auth reducer', () => {
-    it('Устанавливает пользовательские данные', () => {
-        const result = authReducer(initialState, {
-            type: SET_USER_DATA,
-            payload: {
-                isAuth: true,
-                email: 'example@mail.com',
-                password: 'my-password-123'
-            }
-        })
-        expect(result).toEqual({
-            isLoading: false,
-            showSignUpForm: false,
-            isAouthorized: true,
-            email: 'example@mail.com',
-            password: 'my-password-123'
-        })
 
-    })
-})
 
 describe('auth reducer', () => {
     it('Осуществляет выход пользлвателя', () => {
         const result = authReducer(initialState, {
-            type: GET_LOGOUT,
+            type: LOG_OUT,
             payload: true
         })
         expect(result).toEqual({
             isLoading: false,
             showSignUpForm: false,
-            isAouthorized: true,
+            isLoggedIn: false,
             email: null,
             password: null
         })

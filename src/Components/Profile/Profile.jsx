@@ -5,14 +5,14 @@ import {NavLink, Redirect} from "react-router-dom";
 import {compose} from "redux";
 import {setPaymentData} from "../Redux/profile-reducer";
 import {connect} from "react-redux";
-import {getLogOut} from "../Redux/auth-reducer";
+import {getLogOutAC} from "../Redux/auth-reducer";
 
 const Profile = (props) => {
 
     const signOutHandler = () => {
         //props.logOut()
         //props.navigateTo('home')
-        props.getLogOut(false)
+        props.getLogOutAC()
 
     }
     const handleSubmit = (event) => {
@@ -25,7 +25,7 @@ const Profile = (props) => {
     }
 
     return (
-        !props.isAouthorized ? <Redirect to={'home'}/> :
+
             <div>Profile page
             <NavLink onClick={signOutHandler} to={'/home'}><button>Sign out</button></NavLink>
                 <hr/>
@@ -59,7 +59,7 @@ let mapStateToProps = (state) => {
         month: state.ProfileData.month,
         card: state.ProfileData.cardNumber,
         cvc: state.ProfileData.cvc,
-        isAouthorized: state.auth.isAouthorized
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 
@@ -69,8 +69,7 @@ Profile.propTypes = {
 }
 //export const ProfileWithAuth = withAuth(Profile) - video workshop#2;
 let Compose = compose(
-    connect(mapStateToProps, {setPaymentData, getLogOut}),
-    withAuth
+    connect(mapStateToProps, {setPaymentData, getLogOutAC})
 )(Profile)
 
 export default Compose

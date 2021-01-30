@@ -4,7 +4,8 @@ const baseURL = 'https://loft-taxi.glitch.me/'
 
 export const authAPI = {
     getLogin(email, password) {
-        let result = axios.post(`${baseURL}auth`, {email: email.value, password: password.value})
+
+        let result = axios.post(`${baseURL}auth`, {email: email, password: password})
 
         return result
     },

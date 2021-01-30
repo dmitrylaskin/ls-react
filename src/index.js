@@ -14,11 +14,11 @@ ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
-            <AuthProvider>
+
                 <MuiThemeProvider theme={theme}>
                     <App/>
                 </MuiThemeProvider>
-            </AuthProvider>
+
             </Provider>
         </BrowserRouter>
     </React.StrictMode>,
