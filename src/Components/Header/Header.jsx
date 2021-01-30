@@ -10,20 +10,20 @@ import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
 
 
+
 const Header = (props) => {
 
                 return <AppBar position="static" color="default">
                             <Toolbar>
-                                <IconButton edge="start" color="inherit" aria-label="menu">
-
-                                </IconButton>
-
 
                                 <img src={Logo} alt=""/>
+                                <nav>
+                                    <NavLink activeStyle={{color:'red'}} to={'/home'}><button>home</button></NavLink>
+                                    <NavLink activeStyle={{color:'red'}} to={'/profile'}><button>profile</button></NavLink>
+                                    <NavLink activeStyle={{color:'red'}} to={'/map'}><button>map</button></NavLink>
+                                </nav>
 
-                                <NavLink activeStyle={{color:'red'}} to={'/home'}><button>home</button></NavLink>
-                                <NavLink activeStyle={{color:'red'}} to={'/profile'}><button>profile</button></NavLink>
-                                <NavLink activeStyle={{color:'red'}} to={'/map'}><button>map</button></NavLink>
+
 
                                 {/*<Button onClick={() => props.navigateTo('home')} color="inherit">Home</Button>*/}
                                 {/*<Button onClick={() => props.navigateTo('profile')} color="inherit">Profile</Button>*/}

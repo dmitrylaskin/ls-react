@@ -39,7 +39,7 @@ class SignUpForm extends React.Component {
                 <label htmlFor="password">Password:</label>
                 <input id="password" type="password" name="password" size="28" value={this.state.password} onChange={this.inputHandler('password')}/>
 
-                <input type="submit" value="Sign up"/>
+                <input type="submit" value="Apply" style={{backgroundColor: 'lightgreen'}}/>
             </form>
                 <hr/>
                 <button onClick={() => this.props.loginFormToggle(false)}>Sign In</button>

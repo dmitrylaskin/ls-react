@@ -7,8 +7,6 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {
     authenticate,
-    AUTHENTICATE,
-    getLoginThunkCreator,
     loginFormToggle,
     showLoader
 } from "../Redux/auth-reducer";
@@ -27,7 +25,6 @@ class Home extends React.Component {
         const {email, password} = event.target
 
         this.props.authenticate(email.value, password.value)
-        //this.props.getLoginThunkCreator(email, password, this.props.logIn)
 
     }
 
@@ -65,5 +62,4 @@ let Compose = compose(
     connect(mapStateToProps, {showLoader,loginFormToggle, authenticate})
 )(Home)
 
-//export const HomeWithAuth = withAuth(Home)
 export default Compose

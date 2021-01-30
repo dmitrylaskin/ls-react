@@ -20,7 +20,7 @@ class Map extends React.Component {
         }
     }
     componentDidMount() {
-        if (this.props.IsLoggedIn) {
+
             mapboxgl.accessToken = 'pk.eyJ1Ijoid2V2IiwiYSI6ImNrazJkOHgyNTEwZmwybm81cnhveGg1bG4ifQ.p_mRS1GjQSlWlB2FeH0Q4Q';
             this.map = new mapboxgl.Map({
                 container: this.myRef.current,
@@ -28,7 +28,7 @@ class Map extends React.Component {
                 center: [30.32, 59.93], // starting position [lng, lat]
                 zoom: 10 // starting zoom
             });
-        }
+
     }
     // componentWillUnmount() {
     //     this.map.remove()

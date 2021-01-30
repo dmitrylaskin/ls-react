@@ -5,3 +5,22 @@
     display: flex;
 
 }
+.wrapper-auth {
+    width: 100%;
+    height: 100vh;
+    display: block;
+
+
+}
+
+.container {
+    display: flex;
+}
+
+.logo-section {
+    background-color: rgba(0, 0, 0, 0.87);
+    width: 485px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

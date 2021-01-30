@@ -10,8 +10,7 @@ import {getLogOutAC} from "../Redux/auth-reducer";
 const Profile = (props) => {
 
     const signOutHandler = () => {
-        //props.logOut()
-        //props.navigateTo('home')
+
         props.getLogOutAC()
 
     }
@@ -19,7 +18,6 @@ const Profile = (props) => {
         event.preventDefault()
 
         let {name, month, cardNumber, cvc} = event.target
-        console.log(name.value, month.value, cardNumber.value, cvc.value)
 
         props.setPaymentData(name.value, month.value, cardNumber.value, cvc.value)
     }
@@ -27,7 +25,7 @@ const Profile = (props) => {
     return (
 
             <div>Profile page
-            <NavLink onClick={signOutHandler} to={'/home'}><button>Sign out</button></NavLink>
+            <NavLink onClick={signOutHandler} to={'/home'}><button style={{backgroundColor: 'lightcoral'}}>Sign out</button></NavLink>
                 <hr/>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name:</label>

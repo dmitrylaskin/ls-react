@@ -9,6 +9,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {setCurrentPage} from "./Components/Redux/app-reducer";
+import Logo from './assets/img/header_logo.png'
 
 export const MyContext = React.createContext()
 
@@ -18,8 +19,14 @@ class App extends React.Component {
 
     render() {
         return (
-                <>
-                    <Header />
+                <div className={this.props.isLoggedIn ? 'wrapper-auth': 'wrapper'}>
+                    <div className={this.props.isLoggedIn ? '' : 'container'}>
+                    {this.props.isLoggedIn
+                        ? <Header/>
+                        : <div className='logo-section'>
+                                <img src={Logo} alt=""/>
+                            </div>}
+
 
                     <main>
                         <section style={{padding: '20px'}}>
@@ -36,14 +43,17 @@ class App extends React.Component {
                         </section>
 
                     </main>
-                </>
+                    </div>
+                </div>
 
         );
     }
 }
 const mapStateToProps = (state) => {
 
-    return {app: state.app.currentPage}
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    }
 }
 let Compose = compose(
     connect(mapStateToProps, {setCurrentPage}),
