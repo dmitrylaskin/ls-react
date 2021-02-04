@@ -12,6 +12,7 @@ import {
 } from "../Redux/auth-reducer";
 import LoginForm from "../LoginForm/LoginForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
+import Button from "../Button/Button";
 
 
 class Home extends React.Component {
@@ -43,7 +44,7 @@ class Home extends React.Component {
                     : this.props.isLoading
                         ? <div>Loading...</div>
                         : this.props.isLoggedIn
-                            ? (<p>You are logged in <NavLink to={'/profile'}><button type='button'>go to Profile</button></NavLink></p>)
+                            ? (<p>You are logged in <NavLink to={'/profile'}><Button name={'go to Profile'}></Button></NavLink></p>)
                             : <LoginForm loginFormToggle={this.props.loginFormToggle} handleSubmit={this.handleSubmit}/>}
             </>
         );
@@ -51,6 +52,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log('Home mstp')
     return {
         isLoading: state.auth.isLoading,
         showSignUpForm: state.auth.showSignUpForm,

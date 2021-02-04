@@ -8,28 +8,26 @@ import Logo from '../../assets/img/header_logo.png'
 import {MyContext} from "../../App";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import classes from './Header.module.css'
+
+
 
 
 
 const Header = (props) => {
 
-                return <AppBar position="static" color="default">
-                            <Toolbar>
-
+                return <header className={classes.header}>
                                 <img src={Logo} alt=""/>
-                                <nav>
-                                    <NavLink activeStyle={{color:'red'}} to={'/home'}><button>home</button></NavLink>
-                                    <NavLink activeStyle={{color:'red'}} to={'/profile'}><button>profile</button></NavLink>
-                                    <NavLink activeStyle={{color:'red'}} to={'/map'}><button>map</button></NavLink>
+                                <nav className={classes.navbar}>
+                                    <ul className={classes.navbarList}>
+                                        <li className={classes.navbarItem}><NavLink className={classes.navbarLink} activeStyle={{color:'#FDBF5A'}} to={'/home'}>Home</NavLink></li>
+                                        <li className={classes.navbarItem}><NavLink className={classes.navbarLink} activeStyle={{color:'#FDBF5A'}} to={'/profile'}>Profile</NavLink></li>
+                                        <li className={classes.navbarItem}><NavLink className={classes.navbarLink} activeStyle={{color:'#FDBF5A'}} to={'/map'}>Map</NavLink></li>
+                                    </ul>
+
                                 </nav>
-
-
-
-                                {/*<Button onClick={() => props.navigateTo('home')} color="inherit">Home</Button>*/}
-                                {/*<Button onClick={() => props.navigateTo('profile')} color="inherit">Profile</Button>*/}
-                                {/*<Button onClick={() => props.navigateTo('map')} color="inherit">Map</Button>*/}
-                            </Toolbar>
-                        </AppBar>
+                        </header>
 
 };
 

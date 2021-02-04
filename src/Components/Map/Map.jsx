@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import './Map.css'
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
+import {getIsLoggedIn} from "../Redux/map-selector";
 
 
 class Map extends React.Component {
@@ -30,9 +31,9 @@ class Map extends React.Component {
             });
 
     }
-    // componentWillUnmount() {
-    //     this.map.remove()
-    // }
+    componentWillUnmount() {
+        this.map.remove()
+    }
 
 
     render() {
@@ -49,8 +50,9 @@ class Map extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
+    console.log('home mstp')
     return  {
-        isLoggedIn: state.auth.isLoggedIn
+        isLoggedIn: getIsLoggedIn(state)
     }
 }
 

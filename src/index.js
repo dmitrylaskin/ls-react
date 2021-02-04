@@ -9,16 +9,23 @@ import {MuiThemeProvider} from "@material-ui/core/styles";
 import {AuthProvider} from "./Components/HOCs/withAuth";
 import {Provider} from "react-redux";
 import store from "./Components/Redux/redux-store";
+import {persistor} from "./Components/Redux/redux-store";
+import {FAKE} from "./Components/Redux/profile-reducer";
+import {PersistGate} from 'redux-persist/integration/react'
+
+// setInterval(()=>{
+//     store.dispatch({type: FAKE})
+// },1000)
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
-
-                <MuiThemeProvider theme={theme}>
-                    <App/>
-                </MuiThemeProvider>
-
+                <PersistGate loading={null} persistor={persistor}>
+                    <MuiThemeProvider theme={theme}>
+                        <App/>
+                    </MuiThemeProvider>
+                </PersistGate>
             </Provider>
         </BrowserRouter>
     </React.StrictMode>,

@@ -3,29 +3,35 @@ import PropTypes from 'prop-types'
 import {withAuth} from "../HOCs/withAuth";
 import {NavLink, Redirect} from "react-router-dom";
 import {compose} from "redux";
-import {setPaymentData} from "../Redux/profile-reducer";
+import {paymentDataRequest, setPaymentData} from "../Redux/profile-reducer";
 import {connect} from "react-redux";
-import {getLogOutAC} from "../Redux/auth-reducer";
+import {getLogOut} from "../Redux/auth-reducer";
+import Button from "../Button/Button";
+import classes from '../Button/Button.module.css'
+import {getMyArray} from "../Redux/profile-selector";
 
 const Profile = (props) => {
 
     const signOutHandler = () => {
 
-        props.getLogOutAC()
+        props.getLogOut()
 
     }
     const handleSubmit = (event) => {
         event.preventDefault()
 
         let {name, month, cardNumber, cvc} = event.target
+        props.paymentDataRequest(name.value, month.value, cardNumber.value, cvc.value)
 
-        props.setPaymentData(name.value, month.value, cardNumber.value, cvc.value)
     }
 
     return (
 
+        !props.isLoggedIn ? <Redirect to={'home'}/> :
+
             <div>Profile page
-            <NavLink onClick={signOutHandler} to={'/home'}><button style={{backgroundColor: 'lightcoral'}}>Sign out</button></NavLink>
+
+            <NavLink onClick={signOutHandler} to={'/home'}><Button name={'Sign out'} className={classes.myButton}/></NavLink>
                 <hr/>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name:</label>
@@ -44,20 +50,22 @@ const Profile = (props) => {
                 <div>Card: {props.card}</div>
                 <div>CVC: {props.cvc}</div>
 
-
+                {console.log('Profile render')}
         </div>
 
     );
 };
 
 let mapStateToProps = (state) => {
-
+    console.log('Profile mstp')
     return  {
         name: state.ProfileData.name,
         month: state.ProfileData.month,
         card: state.ProfileData.cardNumber,
         cvc: state.ProfileData.cvc,
-        isLoggedIn: state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn,
+        token: state.auth.token,
+        myArray: getMyArray(state)
     }
 }
 
@@ -67,7 +75,7 @@ Profile.propTypes = {
 }
 //export const ProfileWithAuth = withAuth(Profile) - video workshop#2;
 let Compose = compose(
-    connect(mapStateToProps, {setPaymentData, getLogOutAC})
+    connect(mapStateToProps, {paymentDataRequest, getLogOut})
 )(Profile)
 
 export default Compose

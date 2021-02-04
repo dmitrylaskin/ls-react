@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1C1A19;
+    padding: 20px;
+}
+.headerImage {
+
+}
+.navbar {
+
+}
+.navbarList {
+    display: flex;
+}
+.navbarItem {
+    margin-right: 30px;
+
+}
+.navbarLink {
+    color: white;
+    font-size: 21px;
+}
