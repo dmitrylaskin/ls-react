@@ -14,7 +14,7 @@ function* loginWatcher() {
     yield takeEvery(AUTHENTICATE, loginSaga)
 
 }
-function* loginSaga(action) {
+export function* loginSaga(action) {
 
         yield put(showLoader(true))
         const loginData = yield call(authAPI.getLogin, action.payload.email, action.payload.password)

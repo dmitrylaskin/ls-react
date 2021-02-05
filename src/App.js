@@ -26,7 +26,7 @@ class App extends React.Component {
 
 
 
-                        <section className={!this.props.isLoggedIn && classes.mapSection}>
+                        <section className={!this.props.isLoggedIn ? classes.mapSection : classes.mainSection}>
                             <Switch>
                                 <Route exact path='/' render={() => <Redirect to={'/home'} /> }/>
                                 <Route path='/home' render={() => <Home />}/>

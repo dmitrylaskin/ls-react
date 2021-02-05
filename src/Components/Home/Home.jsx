@@ -19,34 +19,46 @@ class Home extends React.Component {
     static propTypes = {
         navigateTo: PropTypes.func
     }
+    state = {
+        email: '',
+        password: ''
+    }
 
-    handleSubmit = async (event) => {
+    handleEmailInput = (event) => {
+        this.setState({email: event.target.value})
+    }
+    handlePassInput = (event) => {
+        this.setState({password: event.target.value})
+    }
+
+    handleSubmit = (event) => {
         event.preventDefault()
-
-        const {email, password} = event.target
-
-        this.props.authenticate(email.value, password.value)
-
+        this.props.authenticate(this.state.email, this.state.password)
     }
 
-    inputHandler = (field) => {
-        return (event) => this.setState({[field]: event.target.value})
-    }
+    // inputHandler = (field) => {
+    //     return (event) => this.setState({[field]: event.target.value})
+    // }
 
 
 
 
     render() {
 
-        return (<>
+        return (<div>
                 {this.props.showSignUpForm
                     ? <SignUpForm loginFormToggle={this.props.loginFormToggle}/>
                     : this.props.isLoading
-                        ? <div>Loading...</div>
+                        ? <div style={{fontSize: '23px'}}>Loading...</div>
                         : this.props.isLoggedIn
-                            ? (<p>You are logged in <NavLink to={'/profile'}><Button name={'go to Profile'}></Button></NavLink></p>)
-                            : <LoginForm loginFormToggle={this.props.loginFormToggle} handleSubmit={this.handleSubmit}/>}
-            </>
+                            ? (<p>You are logged in <NavLink to={'/profile'}><Button name={'go to Profile'}/></NavLink></p>)
+                            : <LoginForm email={this.state.email} password={this.state.password}
+                                         handleEmailInput={this.handleEmailInput}
+                                         handlePassInput={this.handlePassInput}
+                                         loginFormToggle={this.props.loginFormToggle}
+                                         handleSubmit={this.handleSubmit}/>
+                    }
+            </div>
         );
     }
 }

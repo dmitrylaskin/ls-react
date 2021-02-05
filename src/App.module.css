@@ -31,5 +31,12 @@
     width: 100%;
     padding: 20px;
     background: url("./assets/img/bg_map.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+
+}
+.mainSection {
+    height: 100vh;
 }

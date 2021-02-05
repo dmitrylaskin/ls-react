@@ -1,5 +1,6 @@
 .myButton {
     padding: 5px 10px;
-    background-color: lightgreen;
-    border-radius: 5px;
+    background-color: #FDBF5A;
+    border-radius: 20px;
+    font-size: 23px;
 }

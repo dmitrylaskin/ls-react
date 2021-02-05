@@ -1,0 +1,29 @@
+.formWrapper {
+    width: 580px;
+    height: 540px;
+    background-color: white;
+    padding: 55px 115px;
+    border-radius: 20px;
+}
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+}
+.inputForm {
+    height: 35px;
+    margin-bottom: 35px;
+    background-color: #9ba0a0;
+
+}
+.linkForm {
+    cursor: pointer;
+    color: #FDBF5A;
+}
+.formTitle {
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+}

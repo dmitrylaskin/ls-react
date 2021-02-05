@@ -12,6 +12,7 @@ const sagaMiddleWare = createSagaMiddleware()
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: ['auth']
 }
 
 let rootReducer = combineReducers({
@@ -21,6 +22,7 @@ let rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = createStore(persistedReducer, applyMiddleware(thunk, sagaMiddleWare))
+window.store = store
 
 sagaMiddleWare.run(rootSaga)
 

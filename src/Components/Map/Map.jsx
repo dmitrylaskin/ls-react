@@ -1,9 +1,10 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
-import './Map.css'
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {getIsLoggedIn} from "../Redux/map-selector";
+import {getCardName, getIsLoggedIn} from "../Redux/map-selector";
+import classes from './Map.module.css'
+import DestinationForm from "../DestinationForm/DestinationForm";
 
 
 class Map extends React.Component {
@@ -13,13 +14,7 @@ class Map extends React.Component {
         this.map = null
     }
 
-    styles = {
-        myMap: {
-            width: '100%',
-            height: '100vh',
-            background: 'white'
-        }
-    }
+
     componentDidMount() {
 
             mapboxgl.accessToken = 'pk.eyJ1Ijoid2V2IiwiYSI6ImNrazJkOHgyNTEwZmwybm81cnhveGg1bG4ifQ.p_mRS1GjQSlWlB2FeH0Q4Q';
@@ -40,9 +35,9 @@ class Map extends React.Component {
 
         return (
             !this.props.isLoggedIn ? <Redirect to={'home'}/> :
-            <div className='map-wrapper'>
-                <div className='map' data-testid='map' ref={this.myRef}>
-
+            <div className={classes.wrapper}>
+                <div className={classes.map} data-testid='map' ref={this.myRef}>
+                    {this.props.cardName && <DestinationForm/>}
                 </div>
             </div>
 
@@ -52,7 +47,8 @@ class Map extends React.Component {
 const mapStateToProps = (state) => {
     console.log('home mstp')
     return  {
-        isLoggedIn: getIsLoggedIn(state)
+        isLoggedIn: getIsLoggedIn(state),
+        cardName: getCardName(state)
     }
 }
 

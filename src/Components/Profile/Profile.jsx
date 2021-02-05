@@ -8,21 +8,27 @@ import {connect} from "react-redux";
 import {getLogOut} from "../Redux/auth-reducer";
 import Button from "../Button/Button";
 import classes from '../Button/Button.module.css'
-import {getMyArray} from "../Redux/profile-selector";
+import {
+    getCardNumber,
+    getCvc,
+    getExpiryDate,
+    getIsLoggedIn,
+    getMyArray,
+    getName,
+    getToken
+} from "../Redux/profile-selector";
 
 const Profile = (props) => {
 
     const signOutHandler = () => {
-
         props.getLogOut()
-
     }
+
     const handleSubmit = (event) => {
         event.preventDefault()
 
         let {name, month, cardNumber, cvc} = event.target
         props.paymentDataRequest(name.value, month.value, cardNumber.value, cvc.value)
-
     }
 
     return (
@@ -36,7 +42,7 @@ const Profile = (props) => {
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name:</label>
                     <input name="name" type="text" id="name"/>
-                    <label htmlFor="month">month:</label>
+                    <label htmlFor="month">Expiry date:</label>
                     <input name="month" type="text" id="month"/>
                     <label htmlFor="cardNumber">Card number:</label>
                     <input name="cardNumber" type="text" id="cardNumber"/>
@@ -44,27 +50,27 @@ const Profile = (props) => {
                     <input name="cvc" type="text" id="cvc"/>
                     <button type="submit">Save</button>
                 </form>
-                <hr/>
+                <div>-----------------------------</div>
+                <div style={{fontSize: '18px', fontWeight: 700}}>Redux data: </div>
                 <div>Name: {props.name}</div>
-                <div>Month: {props.month}</div>
-                <div>Card: {props.card}</div>
+                <div>Expiry date: {props.month}</div>
+                <div>Card number: {props.card}</div>
                 <div>CVC: {props.cvc}</div>
 
                 {console.log('Profile render')}
         </div>
-
     );
 };
 
 let mapStateToProps = (state) => {
     console.log('Profile mstp')
     return  {
-        name: state.ProfileData.name,
-        month: state.ProfileData.month,
-        card: state.ProfileData.cardNumber,
-        cvc: state.ProfileData.cvc,
-        isLoggedIn: state.auth.isLoggedIn,
-        token: state.auth.token,
+        name: getName(state),
+        month: getExpiryDate(state),
+        card: getCardNumber(state),
+        cvc: getCvc(state),
+        isLoggedIn: getIsLoggedIn(state),
+        token: getToken(state),
         myArray: getMyArray(state)
     }
 }
@@ -73,7 +79,6 @@ let mapStateToProps = (state) => {
 Profile.propTypes = {
     text: PropTypes.string,
 }
-//export const ProfileWithAuth = withAuth(Profile) - video workshop#2;
 let Compose = compose(
     connect(mapStateToProps, {paymentDataRequest, getLogOut})
 )(Profile)
