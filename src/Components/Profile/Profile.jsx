@@ -6,8 +6,8 @@ import {compose} from "redux";
 import {paymentDataRequest, setPaymentData} from "../Redux/profile-reducer";
 import {connect} from "react-redux";
 import {getLogOut} from "../Redux/auth-reducer";
-import Button from "../Button/Button";
-import classes from '../Button/Button.module.css'
+import MyButton from "../Button/MyButton";
+import classes from '../Button/MyButton.module.css'
 import {
     getCardNumber,
     getCvc,
@@ -37,7 +37,7 @@ const Profile = (props) => {
 
             <div>Profile page
 
-            <NavLink onClick={signOutHandler} to={'/home'}><Button name={'Sign out'} className={classes.myButton}/></NavLink>
+            <NavLink onClick={signOutHandler} to={'/home'}><MyButton value={'Sign out'} className={classes.myButton}/></NavLink>
                 <hr/>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name:</label>

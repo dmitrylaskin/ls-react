@@ -2,7 +2,7 @@ import React from 'react';
 import {loginFormToggle} from "../Redux/auth-reducer";
 import {authAPI} from "../../Api/api";
 import classes from '../LoginForm/LoginForm.module.css'
-import Button from "../Button/Button";
+import MyButton from "../Button/MyButton";
 const axios = require('axios');
 
 
@@ -42,7 +42,7 @@ class SignUpForm extends React.Component {
                 <label htmlFor="password">Password:</label>
                 <input className={classes.inputForm} id="password" type="password" name="password" size="28" value={this.state.password} onChange={this.inputHandler('password')}/>
 
-                <Button type="submit" name='Зарегестрироваться'/>
+                <MyButton type="submit" value='Зарегестрироваться'/>
             </form>
                 <hr/>
                 <span>Уже зарегестрированы? </span><a className={classes.linkForm} onClick={() => this.props.loginFormToggle(false)}>Войти</a>

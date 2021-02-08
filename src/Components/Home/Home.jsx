@@ -12,7 +12,7 @@ import {
 } from "../Redux/auth-reducer";
 import LoginForm from "../LoginForm/LoginForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
-import Button from "../Button/Button";
+import MyButton from "../Button/MyButton";
 
 
 class Home extends React.Component {
@@ -51,7 +51,7 @@ class Home extends React.Component {
                     : this.props.isLoading
                         ? <div style={{fontSize: '23px'}}>Loading...</div>
                         : this.props.isLoggedIn
-                            ? (<p>You are logged in <NavLink to={'/profile'}><Button name={'go to Profile'}/></NavLink></p>)
+                            ? (<p>You are logged in <NavLink to={'/profile'}><MyButton value={'go to Profile'}/></NavLink></p>)
                             : <LoginForm email={this.state.email} password={this.state.password}
                                          handleEmailInput={this.handleEmailInput}
                                          handlePassInput={this.handlePassInput}

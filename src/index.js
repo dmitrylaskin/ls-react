@@ -10,12 +10,12 @@ import {AuthProvider} from "./Components/HOCs/withAuth";
 import {Provider} from "react-redux";
 import store from "./Components/Redux/redux-store";
 import {persistor} from "./Components/Redux/redux-store";
-import {FAKE} from "./Components/Redux/profile-reducer";
+import {FAKE} from "./Components/Redux/auth-reducer";
 import {PersistGate} from 'redux-persist/integration/react'
 
-// setInterval(()=>{
-//     store.dispatch({type: FAKE})
-// },1000)
+setInterval(()=>{
+    store.dispatch({type: FAKE})
+},1000)
 
 ReactDOM.render(
     <React.StrictMode>
