@@ -2,9 +2,10 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {getCardName, getIsLoggedIn} from "../Redux/map-selector";
+import {getAddresses, getCardName, getIsLoggedIn} from "../Redux/map-selector";
 import classes from './Map.module.css'
 import DestinationForm from "../DestinationForm/DestinationForm";
+import {addressesRequest} from "../Redux/map-reducer";
 
 const coordinates = [[30.296064,59.926102],[30.295998,59.926178],[30.296774,59.926144],
     [30.299091,59.923546],[30.286839,59.920956],[30.279137,59.916134],[30.27503,59.908867],
@@ -54,6 +55,7 @@ class Map extends React.Component {
 
 
     componentDidMount() {
+        this.props.addressesRequest()
 
         mapboxgl.accessToken = 'pk.eyJ1Ijoid2V2IiwiYSI6ImNrazJkOHgyNTEwZmwybm81cnhveGg1bG4ifQ.p_mRS1GjQSlWlB2FeH0Q4Q';
         this.map = new mapboxgl.Map({
@@ -81,7 +83,7 @@ class Map extends React.Component {
             !this.props.isLoggedIn ? <Redirect to={'home'}/> :
             <div className={classes.wrapper}>
                 <div className={classes.map} data-testid='map' ref={this.myRef}>
-                    {this.props.cardName ? <DestinationForm/> : <div className={classes.fillData}>Заполните платежные данные</div>}
+                    {this.props.cardName ? <DestinationForm addresses={this.props.addresses} /> : <div className={classes.fillData}>Заполните платежные данные</div>}
                 </div>
             </div>
 
@@ -92,8 +94,9 @@ const mapStateToProps = (state) => {
     console.log('home mstp')
     return  {
         isLoggedIn: getIsLoggedIn(state),
-        cardName: getCardName(state)
+        cardName: getCardName(state),
+        addresses: getAddresses(state)
     }
 }
 
-export default connect(mapStateToProps, {})(Map);
+export default connect(mapStateToProps, {addressesRequest})(Map);

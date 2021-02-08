@@ -4,3 +4,6 @@ export const getIsLoggedIn = (state) => {
 export const getCardName = (state) => {
     return state.ProfileData.name
 }
+export const getAddresses = (state) => {
+    return state.orderData.addresses
+}

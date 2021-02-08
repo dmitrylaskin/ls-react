@@ -23,3 +23,10 @@ export const profileAPI = {
         return result
     }
 }
+export const mapAPI = {
+    getAddresses() {
+        let result = axios.get('https://loft-taxi.glitch.me/addressList')
+
+        return result
+    }
+}

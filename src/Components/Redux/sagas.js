@@ -1,18 +1,19 @@
 import {all, call, fork, put, takeEvery, select} from "@redux-saga/core/effects";
-import {authAPI, profileAPI} from "../../Api/api";
+import {authAPI, mapAPI, profileAPI} from "../../Api/api";
 import {AUTHENTICATE, getLogIn, setToken, showLoader} from "./auth-reducer";
 import {PAYMENT_DATA_REQUEST, SET_PAYMENT_DATA, setPaymentData} from "./profile-reducer";
+import {ADDRESSES_REQUEST, setAddresses} from "./map-reducer";
 
 //root saga
 export function* rootSaga() {
     yield fork(loginWatcher)
     yield fork(paymentWatcher)
+    yield fork(addressesWatcher)
 
 }
 //login
 function* loginWatcher() {
     yield takeEvery(AUTHENTICATE, loginSaga)
-
 }
 export function* loginSaga(action) {
 
@@ -49,7 +50,19 @@ function* paymentSaga(action) {
     } else {
         alert(paymentData.data.error)
     }
-
 }
 
+//map
+function* addressesWatcher() {
+    yield takeEvery(ADDRESSES_REQUEST, addressesSaga)
+}
+function* addressesSaga() {
+    const response = yield call(mapAPI.getAddresses)
+
+    if (response.data.addresses) {
+        yield put(setAddresses(response.data.addresses))
+    } else {
+        alert('Ошибка сервера')
+    }
+}
 
