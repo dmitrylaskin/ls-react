@@ -2,13 +2,19 @@ import {all, call, fork, put, takeEvery, select} from "@redux-saga/core/effects"
 import {authAPI, mapAPI, profileAPI} from "../../Api/api";
 import {AUTHENTICATE, getLogIn, setToken, showLoader} from "./auth-reducer";
 import {PAYMENT_DATA_REQUEST, SET_PAYMENT_DATA, setPaymentData} from "./profile-reducer";
-import {ADDRESSES_REQUEST, setAddresses} from "./map-reducer";
+import {
+    ADDRESSES_REQUEST,
+    COORDINATES_REQUEST,
+    setAddresses,
+    setCoordinates, setRoute
+} from "./map-reducer";
 
 //root saga
 export function* rootSaga() {
     yield fork(loginWatcher)
     yield fork(paymentWatcher)
     yield fork(addressesWatcher)
+    yield fork(coordinatesWatcher)
 
 }
 //login
@@ -61,6 +67,19 @@ function* addressesSaga() {
 
     if (response.data.addresses) {
         yield put(setAddresses(response.data.addresses))
+    } else {
+        alert('Ошибка сервера')
+    }
+}
+function* coordinatesWatcher() {
+    yield takeEvery(COORDINATES_REQUEST, coordinatesSaga)
+}
+function* coordinatesSaga(action) {
+    const response = yield call(mapAPI.getCoordinates, action.payload.from, action.payload.to)
+    yield put(setRoute(action.payload.from, action.payload.to))
+    console.log('mapAPI response: ',response)
+    if (response.data.length) {
+        yield put(setCoordinates(response.data))
     } else {
         alert('Ошибка сервера')
     }

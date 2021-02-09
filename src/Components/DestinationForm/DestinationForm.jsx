@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Select from "@material-ui/core/Select";
 import MyButton from "../Button/MyButton";
@@ -40,8 +40,10 @@ const DestinationForm = (props) => {
         event.preventDefault()
         setArrival({name: event.target.value})
     }
+    const myButtonHandler = () => {
+        props.coordinatesRequest(departure.name, arrival.name)
 
-
+    }
 
     return (
             props.addresses && <div className={props.classes.form}>
@@ -71,7 +73,7 @@ const DestinationForm = (props) => {
                         if (item !== departure.name) {
                             return <option key={Math.random()} value={item}>{item}</option>}})}
                 </Select>
-                <MyButton value={'Заказать'}/>
+                <button onClick={myButtonHandler}>Заказать</button>
             </div>
     )
 };

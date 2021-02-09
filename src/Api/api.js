@@ -28,5 +28,13 @@ export const mapAPI = {
         let result = axios.get('https://loft-taxi.glitch.me/addressList')
 
         return result
+    },
+    getCoordinates(from, to) {
+
+        let result = axios.get(`https://loft-taxi.glitch.me/route?address1=${from}&address2=${to}`)
+
+
+        return result
     }
 }
+

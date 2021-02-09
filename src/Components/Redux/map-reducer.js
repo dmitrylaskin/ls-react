@@ -1,15 +1,38 @@
-export const GET_ADDRESSES = 'GET_ADDRESSES'
+export const SET_ADDRESSES = 'SET_ADDRESSES'
 export const ADDRESSES_REQUEST = 'ADDRESSES_REQUEST'
+export const SET_COORDINATES = 'SET_COORDINATES'
+export const COORDINATES_REQUEST = 'COORDINATES_REQUEST'
+export const SET_ROUTE = 'SET_ROUTE'
 
 let initialState = {
-    addresses: null
+    addresses: null,
+    coordinates: null,
+    route:{
+        from: null,
+        to: null
+    }
+
 }
 const mapReducer = (state = initialState, action) => {
+
     switch (action.type) {
-        case GET_ADDRESSES:
+        case SET_ADDRESSES:
             return {
                 ...state,
                 addresses: action.payload
+            }
+        case SET_COORDINATES:
+            return {
+                ...state,
+                coordinates: action.payload
+            }
+        case SET_ROUTE:
+            return {
+                ...state,
+                route: {
+                    from: action.payload.from,
+                    to: action.payload.to
+                }
             }
         default:
             return state
@@ -17,7 +40,12 @@ const mapReducer = (state = initialState, action) => {
     }
 }
 
-export const setAddresses = (payload) => ({type:GET_ADDRESSES, payload})
+export const setAddresses = (payload) => ({type:SET_ADDRESSES, payload})
 export const addressesRequest = () => ({type:ADDRESSES_REQUEST})
+export const coordinatesRequest = (from, to) => ({type:COORDINATES_REQUEST, payload: {from, to}})
+export const setCoordinates = (payload) => {
+    return {type: SET_COORDINATES, payload}
+}
+export const setRoute = (from, to) => ({type:SET_ROUTE, payload: {from, to}})
 
 export default mapReducer

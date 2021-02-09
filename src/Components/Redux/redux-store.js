@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import profileReducer from "./profile-reducer";
-import authReducer, {authMiddleware} from "./auth-reducer";
+import authReducer from "./auth-reducer";
 import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
 import {rootSaga} from "./sagas";

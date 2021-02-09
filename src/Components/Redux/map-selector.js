@@ -7,3 +7,12 @@ export const getCardName = (state) => {
 export const getAddresses = (state) => {
     return state.orderData.addresses
 }
+export const getCoordinates = (state) => {
+    return state.orderData.coordinates
+}
+export const getFrom = (state) => {
+    return state.orderData.route.from
+}
+export const getTo = (state) => {
+    return state.orderData.route.to
+}
