@@ -10,6 +10,7 @@ export const authAPI = {
         return result
     },
     getSignUp(email, password, name, surname) {
+
         let result = axios.post(`${baseURL}register`, {email, password, name, surname})
 
         return result
@@ -25,7 +26,7 @@ export const profileAPI = {
 }
 export const mapAPI = {
     getAddresses() {
-        let result = axios.get('https://loft-taxi.glitch.me/addressList')
+        let result = axios.get(`${baseURL}addressList`)
 
         return result
     },

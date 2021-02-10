@@ -6,8 +6,9 @@ import Header from "./Components/Header/Header";
 import Map from "./Components/Map/Map";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-import {compose} from "redux";
 import Logo from './assets/img/header_logo.png'
+import PrivateRoute from "./Components/PrvateRoute";
+import {getLogOut} from "./Components/Redux/auth-reducer";
 
 
 class App extends React.Component {
@@ -19,7 +20,7 @@ class App extends React.Component {
                 <div className={this.props.isLoggedIn ? classes.wrapperAuth : classes.wrapper}>
                     <div className={this.props.isLoggedIn ? '' : classes.container}>
                     {this.props.isLoggedIn
-                        ? <Header/>
+                        ? <Header getLogOut={this.props.getLogOut}/>
                         : <div className={classes.logoSection}>
                                 <img src={Logo} alt=""/>
                             </div>}
@@ -30,8 +31,8 @@ class App extends React.Component {
                             <Switch>
                                 <Route exact path='/' render={() => <Redirect to={'/home'} /> }/>
                                 <Route path='/home' render={() => <Home />}/>
-                                <Route path='/profile' render={() => <Profile />}/>
-                                <Route path='/map' render={() => <Map />}/>
+                                <PrivateRoute path='/profile' component={() => <Profile />}/>
+                                <PrivateRoute path='/map' component={() => <Map />}/>
                                 <Route path='*' render={() => <div><b>404 NOT FOUND</b></div> }/>
                             </Switch>
 
@@ -51,4 +52,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(App)
+export default connect(mapStateToProps, {getLogOut})(App)

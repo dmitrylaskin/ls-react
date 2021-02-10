@@ -39,4 +39,5 @@
 }
 .mainSection {
     height: 100vh;
+    background: url("./assets/img/bg_map.png");
 }

@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {
     authenticate,
-    loginFormToggle,
+    loginFormToggle, registration,
     showLoader
 } from "../Redux/auth-reducer";
 import LoginForm from "../LoginForm/LoginForm";
@@ -20,8 +20,8 @@ class Home extends React.Component {
         navigateTo: PropTypes.func
     }
     state = {
-        email: '',
-        password: ''
+        email: 'test@test.com',
+        password: '123123'
     }
 
     handleEmailInput = (event) => {
@@ -36,18 +36,12 @@ class Home extends React.Component {
         this.props.authenticate(this.state.email, this.state.password)
     }
 
-    // inputHandler = (field) => {
-    //     return (event) => this.setState({[field]: event.target.value})
-    // }
-
-
-
 
     render() {
 
         return (<div>
                 {this.props.showSignUpForm
-                    ? <SignUpForm loginFormToggle={this.props.loginFormToggle}/>
+                    ? <SignUpForm registration={this.props.registration} loginFormToggle={this.props.loginFormToggle}/>
                     : this.props.isLoading
                         ? <div style={{fontSize: '23px'}}>Loading...</div>
                         : this.props.isLoggedIn
@@ -64,7 +58,6 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('Home mstp')
     return {
         isLoading: state.auth.isLoading,
         showSignUpForm: state.auth.showSignUpForm,
@@ -73,7 +66,7 @@ const mapStateToProps = (state) => {
 }
 
 let Compose = compose(
-    connect(mapStateToProps, {showLoader,loginFormToggle, authenticate})
+    connect(mapStateToProps, {showLoader,loginFormToggle, authenticate, registration})
 )(Home)
 
 export default Compose

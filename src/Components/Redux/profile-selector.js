@@ -1,6 +1,3 @@
-export const getMyArray = (state) => {
-    return state.auth.fakeArray.filter(x => true)
-}
 export const getName = (state) => {
     return state.ProfileData.name
 }

@@ -15,6 +15,7 @@ import classes from './Header.module.css'
 
 
 
+
 const Header = (props) => {
 
                 return <header className={classes.header}>
@@ -24,6 +25,8 @@ const Header = (props) => {
                                         <li className={classes.navbarItem}><NavLink className={classes.navbarLink} activeStyle={{color:'#FDBF5A'}} to={'/home'}>Home</NavLink></li>
                                         <li className={classes.navbarItem}><NavLink className={classes.navbarLink} activeStyle={{color:'#FDBF5A'}} to={'/profile'}>Profile</NavLink></li>
                                         <li className={classes.navbarItem}><NavLink className={classes.navbarLink} activeStyle={{color:'#FDBF5A'}} to={'/map'}>Map</NavLink></li>
+                                        <li className={classes.navbarItem}><NavLink className={classes.signOut} to={'/home'} onClick={() => props.getLogOut()}>Sign out</NavLink></li>
+                                        {/*<NavLink onClick={signOutHandler} to={'/home'}><MyButton value={'Sign out'} className={classes.myButton}/></NavLink>*/}
                                     </ul>
 
                                 </nav>

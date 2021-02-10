@@ -1,12 +1,12 @@
 import {all, call, fork, put, takeEvery, select} from "@redux-saga/core/effects";
 import {authAPI, mapAPI, profileAPI} from "../../Api/api";
-import {AUTHENTICATE, getLogIn, setToken, showLoader} from "./auth-reducer";
-import {PAYMENT_DATA_REQUEST, SET_PAYMENT_DATA, setPaymentData} from "./profile-reducer";
+import {AUTHENTICATE, getLogIn, getPaid, REGISTRATION, setToken, showLoader} from "./auth-reducer";
+import {PAYMENT_DATA_REQUEST, setPaymentData} from "./profile-reducer";
 import {
     ADDRESSES_REQUEST,
     COORDINATES_REQUEST,
     setAddresses,
-    setCoordinates, setRoute
+    setCoordinates
 } from "./map-reducer";
 
 //root saga
@@ -15,6 +15,7 @@ export function* rootSaga() {
     yield fork(paymentWatcher)
     yield fork(addressesWatcher)
     yield fork(coordinatesWatcher)
+    yield fork(signInWatcher)
 
 }
 //login
@@ -25,7 +26,6 @@ export function* loginSaga(action) {
 
         yield put(showLoader(true))
         const loginData = yield call(authAPI.getLogin, action.payload.email, action.payload.password)
-        console.log('login-data: ', loginData)
         yield put(showLoader(false))
 
         if (loginData.data.success) {
@@ -34,6 +34,18 @@ export function* loginSaga(action) {
         } else {
             alert(loginData.data.error)
         }
+}
+function* signInWatcher() {
+    yield takeEvery(REGISTRATION, signInSaga)
+}
+function* signInSaga(action) {
+        const registrationData = yield call(authAPI.getSignUp, action.payload.email, action.payload.name, action.payload.surname, action.payload.password)
+    console.log(registrationData)
+    // if (registrationData.data.success) {
+    //
+    // } else {
+    //     alert(registrationData.data.error)
+    // }
 }
 
 //profile
@@ -45,13 +57,13 @@ const getToken = (state) => state.auth.token
 function* paymentSaga(action) {
     //get data from store
     let token = yield select(getToken)
-    console.log('Token: ', token)
 
     const paymentData = yield call(profileAPI.setPaymentData, action.payload.cardNumber, action.payload.expiryDate, action.payload.cardName, action.payload.cvc, token)
-    console.log(paymentData)
 
     if (paymentData.data.success) {
         yield put(setPaymentData(action.payload.cardName, action.payload.expiryDate, action.payload.cardNumber, action.payload.cvc))
+        yield put(getPaid())
+
 
     } else {
         alert(paymentData.data.error)
@@ -76,8 +88,6 @@ function* coordinatesWatcher() {
 }
 function* coordinatesSaga(action) {
     const response = yield call(mapAPI.getCoordinates, action.payload.from, action.payload.to)
-    yield put(setRoute(action.payload.from, action.payload.to))
-    console.log('mapAPI response: ',response)
     if (response.data.length) {
         yield put(setCoordinates(response.data))
     } else {

@@ -4,15 +4,15 @@ export const LOG_IN = 'LOG_IN'
 export const LOG_OUT = 'LOG_OUT'
 export const AUTHENTICATE = 'AUTHENTICATE'
 export const SET_TOKEN = 'SET_TOKEN'
-export const FAKE = 'FAKE'
+export const REGISTRATION = 'REGISTRATION'
+export const IS_PAID = 'IS_PAID'
 
 export let initialState = {
     isLoading: false,
     showSignUpForm: false,
     isLoggedIn: false,
     token: null,
-    fake: 0,
-    fakeArray: [1,2,3,4,5]
+    isPaid: false
 }
 export const authReducer = (state=initialState, action) => {
 
@@ -42,12 +42,12 @@ export const authReducer = (state=initialState, action) => {
                 ...state,
                 token: action.payload
             }
-        case FAKE: {
+        case IS_PAID:
             return {
                 ...state,
-                fake: state.fake + 1
+                isPaid: true
             }
-        }
+
         default:
             return state
     }
@@ -59,18 +59,15 @@ export const getLogIn = () => ({type: LOG_IN})
 export const getLogOut = () => ({type: LOG_OUT})
 export const setToken = (payload) => ({type: SET_TOKEN, payload})
 export const authenticate = (email, password) => ({type:AUTHENTICATE, payload:{email, password}})
+export const registration = (email, name, surname, password) => ({type:REGISTRATION, payload:{email, name, surname, password}})
+export const getPaid = () => ({type: IS_PAID})
 
 
 // export const authMiddleware = (store) => (next) => async (action) => {
-//
 //     if (action.type === AUTHENTICATE) {
-//
 //         store.dispatch(showLoader(true))
-//
 //         let loginData = await authAPI.getLogin(action.payload.email, action.payload.password)
-//
 //         store.dispatch(showLoader(false))
-//
 //         if (loginData.data.success) {
 //             store.dispatch(getLogInAC())
 //         } else {
@@ -79,7 +76,6 @@ export const authenticate = (email, password) => ({type:AUTHENTICATE, payload:{e
 //     } else {
 //         next(action)
 //     }
-//
 // }
 
 

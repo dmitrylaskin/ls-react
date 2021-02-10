@@ -22,3 +22,9 @@
     color: white;
     font-size: 21px;
 }
+.signOut {
+    color: lightcoral;
+    font-size: 21px;
+    border:1px solid lightcoral;
+    padding: 5px;
+}

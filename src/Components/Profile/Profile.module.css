@@ -1,0 +1,49 @@
+.wrapper {
+    width: 900px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    display: flex;
+    padding: 50px;
+    border-radius: 10px;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-right: 80px;
+}
+.col:last-child {
+    margin-right: 0;
+}
+.formRow {
+    margin-bottom: 40px;
+}
+.card {
+    width: 347px;
+    height: 182px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 15px 20px 25px;
+}
+.cardDate {
+    background-color: transparent;
+    width: 50px;
+
+
+}
+.cardNumber {
+    background-color: transparent;
+    height: 60%;
+    font-size: 24px;
+    word-spacing: 15px;
+}
+.cardIcons {
+    height: 20%;
+}

@@ -6,11 +6,8 @@ export const SET_ROUTE = 'SET_ROUTE'
 
 let initialState = {
     addresses: null,
-    coordinates: null,
-    route:{
-        from: null,
-        to: null
-    }
+    coordinates: [],
+
 
 }
 const mapReducer = (state = initialState, action) => {
@@ -26,14 +23,7 @@ const mapReducer = (state = initialState, action) => {
                 ...state,
                 coordinates: action.payload
             }
-        case SET_ROUTE:
-            return {
-                ...state,
-                route: {
-                    from: action.payload.from,
-                    to: action.payload.to
-                }
-            }
+
         default:
             return state
 
@@ -46,6 +36,5 @@ export const coordinatesRequest = (from, to) => ({type:COORDINATES_REQUEST, payl
 export const setCoordinates = (payload) => {
     return {type: SET_COORDINATES, payload}
 }
-export const setRoute = (from, to) => ({type:SET_ROUTE, payload: {from, to}})
 
 export default mapReducer
