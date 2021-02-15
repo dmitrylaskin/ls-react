@@ -6,7 +6,7 @@ import {COORDINATES_REQUEST} from "./map-reducer";
 
 let coordinates = [[30.316273,59.940578],[30.316589,59.940495]]
 
-describe('Todos saga', () => {
+describe('coordinatesSaga saga', () => {
     let gen = coordinatesWatcher()
     it('should wait for the last call', () => {
         expect(gen.next().value).toEqual(takeEvery(COORDINATES_REQUEST, coordinatesSaga))

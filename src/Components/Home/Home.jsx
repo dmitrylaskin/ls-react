@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import {withAuth} from "../HOCs/withAuth";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {authAPI} from "../../Api/api";
 import {connect} from "react-redux";
 import {compose} from "redux";
@@ -45,7 +45,7 @@ class Home extends React.Component {
                     : this.props.isLoading
                         ? <div style={{fontSize: '23px'}}>Loading...</div>
                         : this.props.isLoggedIn
-                            ? (<p>You are logged in <NavLink to={'/profile'}><MyButton value={'go to Profile'}/></NavLink></p>)
+                            ? <Redirect to='/map'/>
                             : <LoginForm email={this.state.email} password={this.state.password}
                                          handleEmailInput={this.handleEmailInput}
                                          handlePassInput={this.handlePassInput}

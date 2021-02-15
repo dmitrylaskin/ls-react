@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Select from "@material-ui/core/Select";
 import MyButton from "../Button/MyButton";
+import CarCategory from "../CarCategory/CarCategory";
 const axios = require('axios');
 
 const styles = {
@@ -9,12 +10,13 @@ const styles = {
         position: 'absolute',
         top: '50px',
         left: '50px',
-        width: '400px',
-        height: '300px',
+        width: '420px',
+        height: '440px',
         backgroundColor: 'white',
         display: 'flex',
         flexDirection: 'column',
-        padding: '30px 40px'
+        padding: '30px 40px',
+        borderRadius: '5px'
     },
     select: {
         marginBottom: '40px'
@@ -73,7 +75,10 @@ const DestinationForm = (props) => {
                         if (item !== departure.name) {
                             return <option key={Math.random()} value={item}>{item}</option>}})}
                 </Select>
-                <button onClick={myButtonHandler}>Заказать</button>
+                <CarCategory/>
+
+                <MyButton onClick={myButtonHandler} value={'Заказать'}/>
+
             </div>
     )
 };

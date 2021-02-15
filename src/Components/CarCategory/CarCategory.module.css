@@ -1,0 +1,25 @@
+.list {
+    display: flex;
+    margin-bottom: 30px;
+}
+.item {
+    width: 35%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 5px;
+}
+.item:last-child {
+    margin-right: 0;
+}
+.title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.subtitle {
+    font-size: 12px;
+}
+.price {
+    font-size: 18px;
+}

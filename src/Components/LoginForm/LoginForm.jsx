@@ -19,7 +19,6 @@ const styles = {
 
 const LoginForm = (props) => {
 
-
     return (<div className={classes.formWrapper}>
             <div className={classes.formTitle}>Войти</div>
             <form onSubmit={props.handleSubmit} className={props.classes.form} noValidate autoComplete="off">
