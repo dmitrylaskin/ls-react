@@ -7,8 +7,6 @@ export const SET_ROUTE = 'SET_ROUTE'
 let initialState = {
     addresses: null,
     coordinates: [],
-
-
 }
 const mapReducer = (state = initialState, action) => {
 

@@ -19,7 +19,7 @@ export function* rootSaga() {
 
 }
 //login
-function* loginWatcher() {
+export function* loginWatcher() {
     yield takeEvery(AUTHENTICATE, loginSaga)
 }
 export function* loginSaga(action) {
@@ -83,10 +83,10 @@ function* addressesSaga() {
         alert('Ошибка сервера')
     }
 }
-function* coordinatesWatcher() {
+export function* coordinatesWatcher() {
     yield takeEvery(COORDINATES_REQUEST, coordinatesSaga)
 }
-function* coordinatesSaga(action) {
+export function* coordinatesSaga(action) {
     const response = yield call(mapAPI.getCoordinates, action.payload.from, action.payload.to)
     if (response.data.length) {
         yield put(setCoordinates(response.data))

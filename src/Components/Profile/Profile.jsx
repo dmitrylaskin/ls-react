@@ -22,6 +22,7 @@ import TextField from "@material-ui/core/TextField";
 import {withStyles} from "@material-ui/styles";
 import logo from '../../assets/img/card-logo.png'
 import secImg from '../../assets/img/sec.png'
+import {getPaidStatus} from "../Redux/map-selector";
 
 const stylesMaterial = {
     input: {
@@ -64,13 +65,12 @@ const Profile = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
         props.paymentDataRequest(state.name, state.expiryDate, state.cardNumber, state.cvc)
+
     }
 
 
     return (
-
 
             <div className={styles.wrapper}>
             {/*<NavLink onClick={signOutHandler} to={'/home'}><MyButton value={'Sign out'} className={classes.myButton}/></NavLink>*/}
@@ -115,7 +115,8 @@ let mapStateToProps = (state) => {
         card: getCardNumber(state),
         cvc: getCvc(state),
         isLoggedIn: getIsLoggedIn(state),
-        token: getToken(state)
+        token: getToken(state),
+        isPaid: getPaidStatus(state)
     }
 }
 

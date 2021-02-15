@@ -35,8 +35,6 @@ class App extends React.Component {
                                 <PrivateRoute path='/map' component={() => <Map />}/>
                                 <Route path='*' render={() => <div><b>404 NOT FOUND</b></div> }/>
                             </Switch>
-
-
                         </section>
 
                     </div>
