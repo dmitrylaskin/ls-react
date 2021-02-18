@@ -7,7 +7,7 @@ const CarCategory = () => {
         <ul className={classes.list}>
             <li className={classes.item}>
                 <label>
-                    <input type="checkbox" />
+                    <input name="category" type="radio" className={classes.checkbox}/>
                     <div className={classes.card}>
                         <div className={classes.title}>Станарт</div>
                         <div className={classes.subtitle}>Стоимость</div>
@@ -20,7 +20,7 @@ const CarCategory = () => {
             </li>
             <li className={classes.item}>
                 <label>
-                    <input type="checkbox" />
+                    <input name="category" type="radio" className={classes.checkbox}/>
                     <div className={classes.card}>
                         <div className={classes.title}>Бизнес</div>
                         <div className={classes.subtitle}>Стоимость</div>
@@ -33,7 +33,7 @@ const CarCategory = () => {
             </li>
             <li className={classes.item}>
                 <label>
-                    <input type="checkbox"/>
+                    <input name="category" type="radio" className={classes.checkbox}/>
                     <div className={classes.card}>
                         <div className={classes.title}>Премиум</div>
                         <div className={classes.subtitle}>Стоимость</div>

@@ -20,7 +20,7 @@
 }
 .navbarLink {
     color: white;
-    font-size: 21px;
+    font-size: 18px;
 }
 .signOut {
     color: lightcoral;
@@ -28,3 +28,4 @@
     border:1px solid lightcoral;
     padding: 5px;
 }
+

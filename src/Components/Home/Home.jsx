@@ -9,10 +9,11 @@ import {
     authenticate,
     loginFormToggle, registration,
     showLoader
-} from "../Redux/auth-reducer";
+} from "../Redux/auth/auth-reducer";
 import LoginForm from "../LoginForm/LoginForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import MyButton from "../Button/MyButton";
+import {withLoader} from "../Loader/withLoader";
 
 
 class Home extends React.Component {
@@ -20,8 +21,8 @@ class Home extends React.Component {
         navigateTo: PropTypes.func
     }
     state = {
-        email: 'test@test.com',
-        password: '123123'
+        email: '',
+        password: ''
     }
 
     handleEmailInput = (event) => {
@@ -38,20 +39,20 @@ class Home extends React.Component {
 
 
     render() {
+        if (this.props.showSignUpForm) {
+            return <SignUpForm registration={this.props.registration} loginFormToggle={this.props.loginFormToggle}/>
+        }
 
         return (<div>
-                {this.props.showSignUpForm
-                    ? <SignUpForm registration={this.props.registration} loginFormToggle={this.props.loginFormToggle}/>
-                    : this.props.isLoading
-                        ? <div style={{fontSize: '23px'}}>Loading...</div>
-                        : this.props.isLoggedIn
-                            ? <Redirect to='/map'/>
-                            : <LoginForm email={this.state.email} password={this.state.password}
-                                         handleEmailInput={this.handleEmailInput}
-                                         handlePassInput={this.handlePassInput}
-                                         loginFormToggle={this.props.loginFormToggle}
-                                         handleSubmit={this.handleSubmit}/>
-                    }
+
+                {this.props.isLoggedIn
+                        ? <Redirect to='/map'/>
+                        : <LoginForm email={this.state.email} password={this.state.password}
+                                     handleEmailInput={this.handleEmailInput}
+                                     handlePassInput={this.handlePassInput}
+                                     loginFormToggle={this.props.loginFormToggle}
+                                     handleSubmit={this.handleSubmit}/>
+                }
             </div>
         );
     }
@@ -66,7 +67,8 @@ const mapStateToProps = (state) => {
 }
 
 let Compose = compose(
-    connect(mapStateToProps, {showLoader,loginFormToggle, authenticate, registration})
+    connect(mapStateToProps, {showLoader, loginFormToggle, authenticate, registration}),
+    withLoader
 )(Home)
 
 export default Compose

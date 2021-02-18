@@ -63,20 +63,5 @@ export const registration = (email, name, surname, password) => ({type:REGISTRAT
 export const getPaid = () => ({type: IS_PAID})
 
 
-// export const authMiddleware = (store) => (next) => async (action) => {
-//     if (action.type === AUTHENTICATE) {
-//         store.dispatch(showLoader(true))
-//         let loginData = await authAPI.getLogin(action.payload.email, action.payload.password)
-//         store.dispatch(showLoader(false))
-//         if (loginData.data.success) {
-//             store.dispatch(getLogInAC())
-//         } else {
-//             alert(loginData.data.error)
-//         }
-//     } else {
-//         next(action)
-//     }
-// }
-
 
 export default authReducer;

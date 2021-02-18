@@ -8,7 +8,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import Logo from './assets/img/header_logo.png'
 import PrivateRoute from "./Components/PrvateRoute";
-import {getLogOut} from "./Components/Redux/auth-reducer";
+import {getLogOut} from "./Components/Redux/auth/auth-reducer";
 
 
 class App extends React.Component {
@@ -16,6 +16,7 @@ class App extends React.Component {
 
 
     render() {
+
         return (
                 <div className={this.props.isLoggedIn ? classes.wrapperAuth : classes.wrapper}>
                     <div className={this.props.isLoggedIn ? '' : classes.container}>

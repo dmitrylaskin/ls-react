@@ -1,19 +1,19 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
-import profileReducer from "./profile-reducer";
-import authReducer from "./auth-reducer";
+import profileReducer from "./profile/profile-reducer";
+import authReducer from "./auth/auth-reducer";
 import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
 import {rootSaga} from "./sagas";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import mapReducer from "./map-reducer";
+import mapReducer from "./map/map-reducer";
 
 const sagaMiddleWare = createSagaMiddleware()
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth', 'ProfileData']
+    //whitelist: ['auth', 'ProfileData']
 }
 
 let rootReducer = combineReducers({

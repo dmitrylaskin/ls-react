@@ -16,7 +16,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         padding: '30px 40px',
-        borderRadius: '5px'
+        borderRadius: '10px'
     },
     select: {
         marginBottom: '40px'
@@ -60,7 +60,8 @@ const DestinationForm = (props) => {
                     }}>
                     {props.addresses.map(item => {
                         if (item !== arrival.name) {
-                            return <option key={Math.random()} value={item}>{item}</option>}})}
+                            return <option key={item} value={item}>{item}</option>}})}
+
                 </Select>
                 <Select
                     className={props.classes.select}
@@ -73,8 +74,9 @@ const DestinationForm = (props) => {
                     }}>
                     {props.addresses.map(item => {
                         if (item !== departure.name) {
-                            return <option key={Math.random()} value={item}>{item}</option>}})}
+                            return <option key={item} value={item}>{item}</option>}})}
                 </Select>
+
                 <CarCategory/>
 
                 <MyButton onClick={myButtonHandler} value={'Заказать'}/>

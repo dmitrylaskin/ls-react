@@ -10,10 +10,10 @@ import {
     getIsLoggedIn,
     getPaidStatus,
     getTo
-} from "../Redux/map-selector";
+} from "../Redux/map/map-selector";
 import classes from './Map.module.css'
 import DestinationForm from "../DestinationForm/DestinationForm";
-import {addressesRequest, coordinatesRequest} from "../Redux/map-reducer";
+import {addressesRequest, coordinatesRequest} from "../Redux/map/map-reducer";
 
 
 class Map extends React.Component {

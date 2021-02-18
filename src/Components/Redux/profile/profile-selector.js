@@ -16,3 +16,6 @@ export const getIsLoggedIn = (state) => {
 export const getToken = (state) => {
     return state.auth.token
 }
+export const getShowDialog = (state) => {
+    return state.ProfileData.showDialog
+}

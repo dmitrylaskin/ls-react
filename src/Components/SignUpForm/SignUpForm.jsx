@@ -1,5 +1,5 @@
 import React from 'react';
-import {loginFormToggle} from "../Redux/auth-reducer";
+import {loginFormToggle} from "../Redux/auth/auth-reducer";
 import {authAPI} from "../../Api/api";
 import classes from '../LoginForm/LoginForm.module.css'
 import MyButton from "../Button/MyButton";
