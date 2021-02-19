@@ -36,4 +36,5 @@ export const setPaymentData = (cardName, expiryDate, cardNumber, cvc) => ({type:
 export const paymentDataRequest = (cardName, expiryDate, cardNumber, cvc) => ({type: PAYMENT_DATA_REQUEST, payload: {cardName, expiryDate, cardNumber, cvc}})
 export const setDialog = (payload) => ({type: SHOW_DIALOG, payload})
 
+
 export default profileReducer;

@@ -5,7 +5,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import {compose} from "redux";
 import {paymentDataRequest, setDialog, setPaymentData} from "../Redux/profile/profile-reducer";
 import {connect} from "react-redux";
-import {getLogOut} from "../Redux/auth/auth-reducer";
+import {getLogOut, getPaid} from "../Redux/auth/auth-reducer";
 import MyButton from "../Button/MyButton";
 import classes from '../Button/MyButton.module.css'
 import styles from './Profile.module.css'
@@ -77,8 +77,17 @@ const Profile = (props) => {
         return errors;
     };
 
-
+    if (props.showDialog) {
+        return <SimpleDialog
+            title={'Профиль'}
+            subtitle={'Платёжные данные обновлены. Теперь вы можете заказывать такси'}
+            setDialog={props.setDialog}
+            link={'/map'}
+            linkValue={'Перейти на карту'}
+            open={true}/>
+    }
     return (
+
         <div className={styles.wrapper}>
             <Form
                 onSubmit={onSubmit}
@@ -101,15 +110,22 @@ const Profile = (props) => {
                             required={true}
                         />
                         <div className={styles.formRow}>
-                            <DatePicker
-                                variant="dialog"
-                                format="MM/YY"
-                                openTo="year"
-                                views={["year", "month"]}
-                                label="Year and Month"
-                                helperText="Start from year selection"
-                                value={selectedDate}
-                                onChange={handleDateChange}
+                            {/*<DatePicker*/}
+                            {/*    variant="dialog"*/}
+                            {/*    format="MM/YY"*/}
+                            {/*    openTo="year"*/}
+                            {/*    views={["year", "month"]}*/}
+                            {/*    label="Year and Month"*/}
+                            {/*    helperText="Start from year selection"*/}
+                            {/*    value={selectedDate}*/}
+                            {/*    onChange={handleDateChange}*/}
+                            {/*/>*/}
+                            <TextField
+                                className={props.classes.inputRow}
+                                label="Expiry date"
+                                name="expiryDate"
+                                margin="none"
+                                required={true}
                             />
                             <TextField
                                 className={props.classes.inputRow}

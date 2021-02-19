@@ -45,7 +45,7 @@ export const authReducer = (state=initialState, action) => {
         case IS_PAID:
             return {
                 ...state,
-                isPaid: true
+                isPaid: action.payload
             }
 
         default:
@@ -60,7 +60,7 @@ export const getLogOut = () => ({type: LOG_OUT})
 export const setToken = (payload) => ({type: SET_TOKEN, payload})
 export const authenticate = (email, password) => ({type:AUTHENTICATE, payload:{email, password}})
 export const registration = (email, name, surname, password) => ({type:REGISTRATION, payload:{email, name, surname, password}})
-export const getPaid = () => ({type: IS_PAID})
+export const getPaid = (payload) => ({type: IS_PAID, payload})
 
 
 

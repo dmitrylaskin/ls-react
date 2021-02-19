@@ -4,12 +4,13 @@ import classes from './SimpleDialog.module.css'
 import {NavLink} from "react-router-dom";
 
 const SimpleDialog = (props) => {
+
     return (
         <Dialog aria-labelledby="simple-dialog-title" open={props.open} >
             <div className={classes.dialog}>
-                <div className={classes.dialogTitle}>Профиль</div>
-                <div className={classes.dialogSubtitle}>Платёжные данные обновлены. Теперь вы можете заказывать такси</div>
-                <NavLink className={classes.myLink} onClick={() => props.setDialog(false)} to={'/map'}>Перейти на карту</NavLink>
+                <div className={classes.dialogTitle}>{props.title}</div>
+                <div className={classes.dialogSubtitle}>{props.subtitle}</div>
+                <NavLink className={classes.myLink} onClick={() => props.setDialog(false)} to={props.link}>{props.linkValue}</NavLink>
             </div>
         </Dialog>
     );

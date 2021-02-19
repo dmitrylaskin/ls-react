@@ -1,6 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {
     getAddresses,
@@ -14,6 +14,8 @@ import {
 import classes from './Map.module.css'
 import DestinationForm from "../DestinationForm/DestinationForm";
 import {addressesRequest, coordinatesRequest} from "../Redux/map/map-reducer";
+import SimpleDialog from "../SimpleDialog/SimpleDialog";
+import Dialog from "@material-ui/core/Dialog";
 
 
 class Map extends React.Component {
@@ -21,6 +23,7 @@ class Map extends React.Component {
         super(props);
         this.myRef = React.createRef()
         this.map = null
+        this.test = false
     }
     drawRoute = (map, coordinates) => {
         if (map.getLayer('route')) {
@@ -93,7 +96,14 @@ class Map extends React.Component {
                 <div className={classes.map} data-testid='map' ref={this.myRef}>
                     {this.props.isPaid
                         ? <DestinationForm coordinates={this.props.coordinates} coordinatesRequest={this.props.coordinatesRequest} addresses={this.props.addresses} />
-                        : <div className={classes.fillData}>Заполните платежные данные</div>}
+                        : <Dialog  aria-labelledby="simple-dialog-title" open={true} >
+                            <div className={classes.dialog}>
+                                <div className={classes.dialogTitle}>Заполните платежние данные</div>
+                                <NavLink className={classes.myLink} to={'/profile'}>Перейти к профилю</NavLink>
+                            </div>
+                        </Dialog>
+
+                    }
                 </div>
             </div>
 

@@ -13,7 +13,7 @@ const sagaMiddleWare = createSagaMiddleware()
 const persistConfig = {
     key: 'root',
     storage,
-    //whitelist: ['auth', 'ProfileData']
+    whitelist: []
 }
 
 let rootReducer = combineReducers({

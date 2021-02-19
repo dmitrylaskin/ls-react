@@ -77,7 +77,7 @@ function* paymentSaga(action) {
 
         if (paymentData.data.success) {
             yield put(setPaymentData(action.payload.cardName, action.payload.expiryDate, action.payload.cardNumber, action.payload.cvc))
-            yield put(getPaid())
+            yield put(getPaid(true))
             yield put(setDialog(true))
         } else {
             throw new Error(paymentData.data.error)
