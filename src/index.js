@@ -11,6 +11,9 @@ import {Provider} from "react-redux";
 import store from "./Components/Redux/redux-store";
 import {persistor} from "./Components/Redux/redux-store";
 import {PersistGate} from 'redux-persist/integration/react'
+import MuiPickersUtilsProvider from "@material-ui/pickers/MuiPickersUtilsProvider";
+
+import DayJsUtils from "@date-io/dayjs";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -18,7 +21,9 @@ ReactDOM.render(
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <MuiThemeProvider theme={theme}>
-                        <App/>
+                        <MuiPickersUtilsProvider utils={DayJsUtils}>
+                            <App/>
+                        </MuiPickersUtilsProvider>
                     </MuiThemeProvider>
                 </PersistGate>
             </Provider>

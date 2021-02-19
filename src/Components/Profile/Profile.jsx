@@ -18,12 +18,14 @@ import {
     getToken
 } from "../Redux/profile/profile-selector";
 import form from "../LoginForm/LoginForm.module.css";
-import TextField from "@material-ui/core/TextField";
 import {withStyles} from "@material-ui/styles";
 import logo from '../../assets/img/card-logo.png'
 import secImg from '../../assets/img/sec.png'
 import {getPaidStatus} from "../Redux/map/map-selector";
 import SimpleDialog from "../SimpleDialog/SimpleDialog";
+import {DatePicker} from "@material-ui/pickers";
+import {Form} from "react-final-form";
+import {TextField} from 'mui-rff';
 
 const stylesMaterial = {
     input: {
@@ -54,61 +56,95 @@ const Profile = (props) => {
         cardNumber: '',
         cvc: ''
     })
+    const [selectedDate, handleDateChange] = useState(new Date());
 
 
-    const inputHandler = (field) =>
-        (event) => setState({...state, [field]:event.target.value})
-
-
-    const signOutHandler = () => {
-        props.getLogOut()
+    const onSubmit = (values) => {
+        props.paymentDataRequest(values.name, values.expiryDate, values.cardNumber, values.cvc)
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        props.paymentDataRequest(state.name, state.expiryDate, state.cardNumber, state.cvc)
-
-    }
-
-
+    const validate = values => {
+        const errors = {};
+        if (!values.name) {
+            errors.name = 'Required';
+        }
+        if (!values.cardNumber) {
+            errors.cardNumber = 'Required';
+        }
+        if (!values.cvc) {
+            errors.cvc = 'Required';
+        }
+        return errors;
+    };
 
 
     return (
-
-            <div className={styles.wrapper}>
-
-                <form onSubmit={handleSubmit} className={styles.col} noValidate autoComplete="off">
-                    <TextField className={props.classes.input} id="standard-basic" label="Имя владельца" value={state.name} onChange={inputHandler('name')}/>
-                    <TextField className={props.classes.input} id="standard-basic" label="Номер карты" value={state.cardNumber} onChange={inputHandler('cardNumber')}/>
-                    <div className={styles.formRow}>
-                        <TextField className={props.classes.inputRow} type={'date'}  id="standard-basic" label=" " value={state.expiryDate} onChange={inputHandler('expiryDate')}/>
-                        <TextField className={props.classes.inputRow} id="standard-basic" label="CVC" value={state.cvc} onChange={inputHandler('cvc')}/>
+        <div className={styles.wrapper}>
+            <Form
+                onSubmit={onSubmit}
+                initialValues={{name: '', cardNumber: '', expiryDate: '', cvc: ''}}
+                validate={validate}
+                render={({handleSubmit, form, submitting, pristine, values}) => (
+                    <form onSubmit={handleSubmit} noValidate className={styles.col}>
+                        <TextField
+                            className={props.classes.input}
+                            label="Имя"
+                            name="name"
+                            margin="none"
+                            required={true}
+                        />
+                        <TextField
+                            className={props.classes.input}
+                            label="Номер карты"
+                            name="cardNumber"
+                            margin="none"
+                            required={true}
+                        />
+                        <div className={styles.formRow}>
+                            <DatePicker
+                                variant="dialog"
+                                format="MM/YY"
+                                openTo="year"
+                                views={["year", "month"]}
+                                label="Year and Month"
+                                helperText="Start from year selection"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                            />
+                            <TextField
+                                className={props.classes.inputRow}
+                                label="cvc"
+                                name="cvc"
+                                margin="none"
+                                type='password'
+                                required={true}
+                            />
+                        </div>
+                        <MyButton type="submit" value={'Сохранить'}/>
+                    </form>
+                )}
+            />
+            <div className={styles.col}>
+                <div className={styles.card}>
+                    <div className={props.classes.cardRow}>
+                        <div className={styles.imgWrapper}><img src={logo} alt=""/></div>
+                        <input className={styles.cardDate} type="text" placeholder={'mm/yy'}
+                               defaultValue={state.expiryDate}/>
                     </div>
 
-                    <MyButton type={"submit"} value={'Сохранить'} />
-                    <SimpleDialog open={props.showDialog} setDialog={props.setDialog} />
-                </form>
-                <div className={styles.col}>
-                    <div className={styles.card}>
-                        <div className={props.classes.cardRow}>
-                            <div className={styles.imgWrapper}><img src={logo} alt=""/></div>
-                            <input className={styles.cardDate} type="text" placeholder={'mm/yy'} defaultValue={state.expiryDate}/>
-                        </div>
-                       
-                        <input className={styles.cardNumber} type="text" placeholder={'0000 0000 0000 0000'} defaultValue={state.cardNumber}/>
-                        <div className={styles.cardIcons}>
-                            <img src={secImg} alt=""/>
-                        </div>
+                    <input className={styles.cardNumber} type="text" placeholder={'0000 0000 0000 0000'}
+                           defaultValue={state.cardNumber}/>
+                    <div className={styles.cardIcons}>
+                        <img src={secImg} alt=""/>
                     </div>
-
                 </div>
-
+            </div>
         </div>
     );
 };
 
 let mapStateToProps = (state) => {
-    return  {
+    return {
         name: getName(state),
         month: getExpiryDate(state),
         card: getCardNumber(state),

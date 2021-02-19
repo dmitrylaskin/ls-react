@@ -32,9 +32,9 @@ class Home extends React.Component {
         this.setState({password: event.target.value})
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        this.props.authenticate(this.state.email, this.state.password)
+    onSubmit = (values) => {
+
+        this.props.authenticate(values.email, values.password)
     }
 
 
@@ -51,7 +51,7 @@ class Home extends React.Component {
                                      handleEmailInput={this.handleEmailInput}
                                      handlePassInput={this.handlePassInput}
                                      loginFormToggle={this.props.loginFormToggle}
-                                     handleSubmit={this.handleSubmit}/>
+                                     onSubmit={this.onSubmit}/>
                 }
             </div>
         );
