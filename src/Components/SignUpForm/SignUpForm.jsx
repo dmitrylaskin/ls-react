@@ -40,7 +40,7 @@ class SignUpForm extends React.Component {
 
 
     onSubmit = (values) => {
-        console.log(values)
+
         this.props.registration(values.email, values.password, values.name, values.surname)
     }
     onClose = () => {

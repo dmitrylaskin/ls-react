@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Select from "@material-ui/core/Select";
 import MyButton from "../Button/MyButton";
