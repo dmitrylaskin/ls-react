@@ -31,7 +31,7 @@ const profileReducer = (state=initialState, action) => {
     }
 }
 
-export const setPaymentData = (cardName, expiryDate, cardNumber, cvc) => ({type: SET_PAYMENT_DATA, payload: {cardName, expiryDate, cardNumber, cvc}}) //- in saga
+export const setPaymentData = (cardName, expiryDate, cardNumber, cvc) => ({type: SET_PAYMENT_DATA, payload: {cardName, expiryDate, cardNumber, cvc}})
 
 export const paymentDataRequest = (cardName, expiryDate, cardNumber, cvc) => ({type: PAYMENT_DATA_REQUEST, payload: {cardName, expiryDate, cardNumber, cvc}})
 export const setDialog = (payload) => ({type: SHOW_DIALOG, payload})

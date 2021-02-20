@@ -1,13 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
-import {withAuth} from "../HOCs/withAuth";
-import {NavLink, Redirect} from "react-router-dom";
 import {compose} from "redux";
-import {paymentDataRequest, setDialog, setPaymentData} from "../Redux/profile/profile-reducer";
+import {paymentDataRequest, setDialog} from "../Redux/profile/profile-reducer";
 import {connect} from "react-redux";
-import {getLogOut, getPaid} from "../Redux/auth/auth-reducer";
+import {getLogOut} from "../Redux/auth/auth-reducer";
 import MyButton from "../Button/MyButton";
-import classes from '../Button/MyButton.module.css'
 import styles from './Profile.module.css'
 import {
     getCardNumber,
@@ -23,7 +20,6 @@ import logo from '../../assets/img/card-logo.png'
 import secImg from '../../assets/img/sec.png'
 import {getPaidStatus} from "../Redux/map/map-selector";
 import SimpleDialog from "../SimpleDialog/SimpleDialog";
-import {DatePicker} from "@material-ui/pickers";
 import {Form} from "react-final-form";
 import {TextField} from 'mui-rff';
 
@@ -44,20 +40,9 @@ const stylesMaterial = {
         justifyContent: 'space-between',
         alignItems: 'center'
     }
-
 }
 
-
 const Profile = (props) => {
-
-    const [state, setState] = useState({
-        name: '',
-        expiryDate: '',
-        cardNumber: '',
-        cvc: ''
-    })
-    const [selectedDate, handleDateChange] = useState(new Date());
-
 
     const onSubmit = (values) => {
         props.paymentDataRequest(values.name, values.expiryDate, values.cardNumber, values.cvc)
@@ -110,16 +95,7 @@ const Profile = (props) => {
                             required={true}
                         />
                         <div className={styles.formRow}>
-                            {/*<DatePicker*/}
-                            {/*    variant="dialog"*/}
-                            {/*    format="MM/YY"*/}
-                            {/*    openTo="year"*/}
-                            {/*    views={["year", "month"]}*/}
-                            {/*    label="Year and Month"*/}
-                            {/*    helperText="Start from year selection"*/}
-                            {/*    value={selectedDate}*/}
-                            {/*    onChange={handleDateChange}*/}
-                            {/*/>*/}
+
                             <TextField
                                 className={props.classes.inputRow}
                                 label="Expiry date"
@@ -145,11 +121,11 @@ const Profile = (props) => {
                     <div className={props.classes.cardRow}>
                         <div className={styles.imgWrapper}><img src={logo} alt=""/></div>
                         <input className={styles.cardDate} type="text" placeholder={'mm/yy'}
-                               defaultValue={state.expiryDate}/>
+                               />
                     </div>
 
                     <input className={styles.cardNumber} type="text" placeholder={'0000 0000 0000 0000'}
-                           defaultValue={state.cardNumber}/>
+                           />
                     <div className={styles.cardIcons}>
                         <img src={secImg} alt=""/>
                     </div>

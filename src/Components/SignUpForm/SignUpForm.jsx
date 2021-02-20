@@ -1,68 +1,111 @@
 import React from 'react';
-import {loginFormToggle} from "../Redux/auth/auth-reducer";
-import {authAPI} from "../../Api/api";
 import classes from '../LoginForm/LoginForm.module.css'
+import s from './SignUoForm.module.css'
 import MyButton from "../Button/MyButton";
 import form from "../LoginForm/LoginForm.module.css";
-import TextField from "@material-ui/core/TextField";
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
+import {Form} from "react-final-form";
+import {TextField} from "mui-rff";
+import Dialog from "@material-ui/core/Dialog";
 
 
 const styles = {
     input: {
-        marginBottom: '30px'
+        marginBottom: '30px',
+        width: '100%'
     }
 }
 
 class SignUpForm extends React.Component {
 
-    state = {
-        email: '',
-        name: '',
-        surname: '',
-        password: ''
+    state = {showDialog: true}
+
+
+    validate = values => {
+        const errors = {};
+        if (!values.email) {
+            errors.email = 'Required';
+        }
+        if (!values.password) {
+            errors.password = 'Required';
+        }
+        if (!values.name) {
+            errors.name = 'Required';
+        }
+        if (!values.surname) {
+            errors.surname = 'Required';
+        }
+        return errors;
+    };
+
+
+    onSubmit = (values) => {
+        console.log(values)
+        this.props.registration(values.email, values.password, values.name, values.surname)
     }
-
-
-    inputHandler = (field) =>
-        (event) => this.setState({[field]: event.target.value})
-
-
-
-    handleSubmit = (event) => {
-        event.preventDefault()
-        // let {email, name, surname, password} = event.target
-        this.props.registration(this.state.email, this.state.password, this.state.name, this.state.surname)
+    onClose = () => {
+        this.props.getSignInRequest(false)
+        this.props.loginFormToggle(false)
     }
 
 
     render() {
+        if (this.props.isSignedIn) {
+            return <Dialog aria-labelledby="simple-dialog-title" open={true}>
+                <div className={s.dialog}>
+                    <div className={s.dialogTitle}>Вы успешно зарегестрированы</div>
+                    <MyButton type={'button'} onClick={this.onClose} value={'Закрыть'}/>
+                </div>
+            </Dialog>
+        }
+
         return (
             <div className={classes.formWrapper}>
                 <div className={classes.formTitle}>Регистрация</div>
-            <form className={classes.loginForm} onSubmit={this.handleSubmit}>
+                <Form
+                    onSubmit={this.onSubmit}
+                    initialValues={{email: '', password: '', name: '', surname: ''}}
+                    validate={this.validate}
+                    render={({handleSubmit, form, submitting, pristine, values}) => (
+                        <form onSubmit={handleSubmit} noValidate className={styles.col}>
+                            <TextField
+                                className={this.props.classes.input}
+                                label="Почта"
+                                name="email"
+                                margin="none"
+                                required={true}
+                            />
+                            <TextField
+                                className={this.props.classes.input}
+                                label="Пароль"
+                                name="password"
+                                type="password"
+                                margin="none"
+                                required={true}
+                            />
+                            <TextField
+                                className={this.props.classes.input}
+                                label="Имя"
+                                name="name"
+                                margin="none"
+                                required={true}
+                            />
+                            <TextField
+                                className={this.props.classes.input}
+                                label="Фамилия"
+                                name="surname"
+                                margin="none"
+                                required={true}
+                            />
 
-                <TextField className={this.props.classes.input} id="standard-basic" label="Email" value={this.state.email} onChange={this.inputHandler('email')}/>
-                <TextField className={this.props.classes.input} id="standard-basic" label="Name" value={this.state.name} onChange={this.inputHandler('name')}/>
-                <TextField className={this.props.classes.input} id="standard-basic" label="Surname" value={this.state.surname} onChange={this.inputHandler('surname')}/>
-                <TextField className={this.props.classes.input} id="standard-basic" label="Password" value={this.state.password} onChange={this.inputHandler('password')}/>
-                {/*<label htmlFor="email">Email:</label>*/}
-                {/*<input className={classes.inputForm} id="email" type="email" name="email" size="28" value={this.state.email} onChange={this.inputHandler('email')}/>*/}
-
-                {/*<label htmlFor="name">Name:</label>*/}
-                {/*<input className={classes.inputForm} id="name" type="text" name="name" size="28" value={this.state.name} onChange={this.inputHandler('name')}/>*/}
-
-                {/*<label htmlFor="name">Surname:</label>*/}
-                {/*<input className={classes.inputForm} id="surname" type="text" name="surname" size="28" value={this.state.surname} onChange={this.inputHandler('surname')}/>*/}
-
-                {/*<label htmlFor="password">Password:</label>*/}
-                {/*<input className={classes.inputForm} id="password" type="password" name="password" size="28" value={this.state.password} onChange={this.inputHandler('password')}/>*/}
-
-                <MyButton type="submit" value='Зарегестрироваться'/>
-            </form>
+                            <MyButton type="submit" value={'Сохранить'}/>
+                        </form>
+                    )}
+                />
 
                 <hr/>
-                <span>Уже зарегестрированы? </span><a className={classes.linkForm} onClick={() => this.props.loginFormToggle(false)}>Войти</a>
+                <span>Уже зарегестрированы? </span><a className={classes.linkForm}
+                                                      onClick={() => this.props.loginFormToggle(false)}>Войти</a>
             </div>
         );
     }

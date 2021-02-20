@@ -31,8 +31,6 @@ const mapReducer = (state = initialState, action) => {
 export const setAddresses = (payload) => ({type:SET_ADDRESSES, payload})
 export const addressesRequest = () => ({type:ADDRESSES_REQUEST})
 export const coordinatesRequest = (from, to) => ({type:COORDINATES_REQUEST, payload: {from, to}})
-export const setCoordinates = (payload) => {
-    return {type: SET_COORDINATES, payload}
-}
+export const setCoordinates = (payload) => ({type: SET_COORDINATES, payload})
 
 export default mapReducer

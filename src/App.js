@@ -13,10 +13,7 @@ import {getLogOut} from "./Components/Redux/auth/auth-reducer";
 
 class App extends React.Component {
 
-
-
     render() {
-
         return (
                 <div className={this.props.isLoggedIn ? classes.wrapperAuth : classes.wrapper}>
                     <div className={this.props.isLoggedIn ? '' : classes.container}>
@@ -25,8 +22,6 @@ class App extends React.Component {
                         : <div className={classes.logoSection}>
                                 <img src={Logo} alt=""/>
                             </div>}
-
-
 
                         <section className={!this.props.isLoggedIn ? classes.mapSection : classes.mainSection}>
                             <Switch>

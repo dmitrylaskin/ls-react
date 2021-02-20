@@ -1,20 +1,16 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {
     getAddresses,
-    getCardName,
     getCoordinates,
-    getFrom,
     getIsLoggedIn,
     getPaidStatus,
-    getTo
 } from "../Redux/map/map-selector";
 import classes from './Map.module.css'
 import DestinationForm from "../DestinationForm/DestinationForm";
 import {addressesRequest, coordinatesRequest} from "../Redux/map/map-reducer";
-import SimpleDialog from "../SimpleDialog/SimpleDialog";
 import Dialog from "@material-ui/core/Dialog";
 
 
@@ -61,7 +57,6 @@ class Map extends React.Component {
 
 
     componentDidMount() {
-        //{"addresses":["Пулково (LED)","Эрмитаж","Кинотеатр Аврора","Мариинский театр"]}
         this.props.addressesRequest()
 
         mapboxgl.accessToken = 'pk.eyJ1Ijoid2V2IiwiYSI6ImNrazJkOHgyNTEwZmwybm81cnhveGg1bG4ifQ.p_mRS1GjQSlWlB2FeH0Q4Q';

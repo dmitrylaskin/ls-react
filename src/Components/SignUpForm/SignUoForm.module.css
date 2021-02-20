@@ -1,0 +1,18 @@
+.myLink {
+    padding: 5px 50px;
+    background-color: #FDBF5A;
+    border-radius: 20px;
+    font-size: 23px;
+    color: black;
+}
+.dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+}
+.dialogTitle {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}

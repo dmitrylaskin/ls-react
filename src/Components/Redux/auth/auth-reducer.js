@@ -6,13 +6,15 @@ export const AUTHENTICATE = 'AUTHENTICATE'
 export const SET_TOKEN = 'SET_TOKEN'
 export const REGISTRATION = 'REGISTRATION'
 export const IS_PAID = 'IS_PAID'
+export const IS_SIGNED_IN = 'IS_SIGNED_IN'
 
 export let initialState = {
     isLoading: false,
     showSignUpForm: false,
     isLoggedIn: false,
     token: null,
-    isPaid: false
+    isPaid: false,
+    isSignedIn: false
 }
 export const authReducer = (state=initialState, action) => {
 
@@ -47,7 +49,11 @@ export const authReducer = (state=initialState, action) => {
                 ...state,
                 isPaid: action.payload
             }
-
+        case IS_SIGNED_IN:
+            return {
+                ...state,
+                isSignedIn: action.payload
+            }
         default:
             return state
     }
@@ -61,7 +67,6 @@ export const setToken = (payload) => ({type: SET_TOKEN, payload})
 export const authenticate = (email, password) => ({type:AUTHENTICATE, payload:{email, password}})
 export const registration = (email, name, surname, password) => ({type:REGISTRATION, payload:{email, name, surname, password}})
 export const getPaid = (payload) => ({type: IS_PAID, payload})
-
-
+export const getSignInRequest = (payload) => ({type: IS_SIGNED_IN, payload})
 
 export default authReducer;

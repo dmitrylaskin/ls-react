@@ -3,7 +3,7 @@ import {withStyles} from '@material-ui/core/styles';
 import Select from "@material-ui/core/Select";
 import MyButton from "../Button/MyButton";
 import CarCategory from "../CarCategory/CarCategory";
-const axios = require('axios');
+
 
 const styles = {
     form: {

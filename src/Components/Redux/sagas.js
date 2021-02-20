@@ -1,6 +1,14 @@
 import {all, call, fork, put, takeEvery, select} from "@redux-saga/core/effects";
 import {authAPI, mapAPI, profileAPI} from "../../Api/api";
-import {AUTHENTICATE, getLogIn, getPaid, REGISTRATION, setToken, showLoader} from "./auth/auth-reducer";
+import {
+    AUTHENTICATE,
+    getLogIn,
+    getPaid,
+    getSignInRequest,
+    REGISTRATION,
+    setToken,
+    showLoader
+} from "./auth/auth-reducer";
 import {PAYMENT_DATA_REQUEST, setDialog, setPaymentData} from "./profile/profile-reducer";
 import {
     ADDRESSES_REQUEST,
@@ -49,8 +57,9 @@ function* signInWatcher() {
 function* signInSaga(action) {
     try {
         const registrationData = yield call(authAPI.getSignUp, action.payload.email, action.payload.name, action.payload.surname, action.payload.password)
+        console.log(registrationData)
         if (registrationData.data.success) {
-
+            yield put(getSignInRequest(true))
         } else {
             throw new Error(registrationData.data.error)
         }

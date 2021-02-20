@@ -33,11 +33,7 @@ const LoginForm = (props) => {
 
     return (<div className={classes.formWrapper}>
             <div className={classes.formTitle}>Войти</div>
-            {/*<form onSubmit={props.handleSubmit} className={props.classes.form} noValidate autoComplete="off">*/}
-            {/*    <TextField className={props.classes.input} id="standard-basic" label="Email" value={props.email} onChange={(event) => props.handleEmailInput(event)}/>*/}
-            {/*    <TextField className={props.classes.input} id="standard-basic" label="Password" value={props.password} onChange={(event) => props.handlePassInput(event)}/>*/}
-            {/*    <MyButton type="submit" value={'Войти'}/>*/}
-            {/*</form>*/}
+
             <Form
                 onSubmit={props.onSubmit}
                 initialValues={{firstName: '', lastName: ''}}
@@ -60,14 +56,7 @@ const LoginForm = (props) => {
                             required={true}
                         />
                             <MyButton type="submit" value={'Войти'}/>
-                        {/*<Button*/}
-                        {/*    variant="contained"*/}
-                        {/*    color="primary"*/}
-                        {/*    type="submit"*/}
-                        {/*    disabled={submitting}*/}
-                        {/*>*/}
-                        {/*    Submit*/}
-                        {/*</Button>*/}
+
                     </form>
                 )}
             />

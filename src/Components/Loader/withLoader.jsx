@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export const withLoader = (Component) => {
     let withLoaderContainer = (props) => {
         if (props.isLoading) {
-            return <div style={{fontSize: '23px'}}>Loading...</div>
+            return <CircularProgress />
         }
         return <Component {...props}/>
     }
