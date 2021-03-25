@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/ls-react/home/static/css/main.70d1916d.chunk.css",
-    "main.js": "/ls-react/home/static/js/main.0d4357b4.chunk.js",
-    "main.js.map": "/ls-react/home/static/js/main.0d4357b4.chunk.js.map",
-    "runtime-main.js": "/ls-react/home/static/js/runtime-main.086fe784.js",
-    "runtime-main.js.map": "/ls-react/home/static/js/runtime-main.086fe784.js.map",
-    "static/js/2.9ff2231d.chunk.js": "/ls-react/home/static/js/2.9ff2231d.chunk.js",
-    "static/js/2.9ff2231d.chunk.js.map": "/ls-react/home/static/js/2.9ff2231d.chunk.js.map",
-    "static/js/3.e0168da8.chunk.js": "/ls-react/home/static/js/3.e0168da8.chunk.js",
-    "static/js/3.e0168da8.chunk.js.map": "/ls-react/home/static/js/3.e0168da8.chunk.js.map",
-    "index.html": "/ls-react/home/index.html",
-    "static/css/main.70d1916d.chunk.css.map": "/ls-react/home/static/css/main.70d1916d.chunk.css.map",
-    "static/js/2.9ff2231d.chunk.js.LICENSE.txt": "/ls-react/home/static/js/2.9ff2231d.chunk.js.LICENSE.txt",
-    "static/media/App.module.css": "/ls-react/home/static/media/bg_map.3242602b.png"
+    "main.css": "/ls-react/static/css/main.caf56f91.chunk.css",
+    "main.js": "/ls-react/static/js/main.0600c6f0.chunk.js",
+    "main.js.map": "/ls-react/static/js/main.0600c6f0.chunk.js.map",
+    "runtime-main.js": "/ls-react/static/js/runtime-main.af864eee.js",
+    "runtime-main.js.map": "/ls-react/static/js/runtime-main.af864eee.js.map",
+    "static/js/2.1fcb1e87.chunk.js": "/ls-react/static/js/2.1fcb1e87.chunk.js",
+    "static/js/2.1fcb1e87.chunk.js.map": "/ls-react/static/js/2.1fcb1e87.chunk.js.map",
+    "static/js/3.e0168da8.chunk.js": "/ls-react/static/js/3.e0168da8.chunk.js",
+    "static/js/3.e0168da8.chunk.js.map": "/ls-react/static/js/3.e0168da8.chunk.js.map",
+    "index.html": "/ls-react/index.html",
+    "static/css/main.caf56f91.chunk.css.map": "/ls-react/static/css/main.caf56f91.chunk.css.map",
+    "static/js/2.1fcb1e87.chunk.js.LICENSE.txt": "/ls-react/static/js/2.1fcb1e87.chunk.js.LICENSE.txt",
+    "static/media/App.module.css": "/ls-react/static/media/bg_map.3242602b.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.086fe784.js",
-    "static/js/2.9ff2231d.chunk.js",
-    "static/css/main.70d1916d.chunk.css",
-    "static/js/main.0d4357b4.chunk.js"
+    "static/js/runtime-main.af864eee.js",
+    "static/js/2.1fcb1e87.chunk.js",
+    "static/css/main.caf56f91.chunk.css",
+    "static/js/main.0600c6f0.chunk.js"
   ]
 }
