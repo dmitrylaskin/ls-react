@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Router} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import {theme} from "loft-taxi-mui-theme"; // Импортируем саму тему
 import {MuiThemeProvider} from "@material-ui/core/styles";
-import {AuthProvider} from "./Components/HOCs/withAuth";
 import {Provider} from "react-redux";
 import store from "./Components/Redux/redux-store";
 import {persistor} from "./Components/Redux/redux-store";
@@ -17,7 +16,7 @@ import DayJsUtils from "@date-io/dayjs";
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <MuiThemeProvider theme={theme}>
@@ -27,7 +26,7 @@ ReactDOM.render(
                     </MuiThemeProvider>
                 </PersistGate>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );
