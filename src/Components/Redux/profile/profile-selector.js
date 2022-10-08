@@ -19,3 +19,7 @@ export const getToken = (state) => {
 export const getShowDialog = (state) => {
     return state.ProfileData.showDialog
 }
+
+export const getFormState = (state, form) => {
+    return state.ProfileData[form]?.values || {}
+}

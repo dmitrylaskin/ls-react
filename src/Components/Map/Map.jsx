@@ -93,7 +93,7 @@ class Map extends React.Component {
                         ? <DestinationForm coordinates={this.props.coordinates} coordinatesRequest={this.props.coordinatesRequest} addresses={this.props.addresses} />
                         : <Dialog  aria-labelledby="simple-dialog-title" open={true} >
                             <div className={classes.dialog}>
-                                <div className={classes.dialogTitle}>Заполните платежние данные</div>
+                                <div className={classes.dialogTitle}>Заполните платежные данные</div>
                                 <NavLink className={classes.myLink} to={'/profile'}>Перейти к профилю</NavLink>
                             </div>
                         </Dialog>

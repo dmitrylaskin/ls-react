@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter} from "react-router-dom";
-import {theme} from "loft-taxi-mui-theme"; // Импортируем саму тему
+import {theme} from "loft-taxi-mui-theme";
 import {MuiThemeProvider} from "@material-ui/core/styles";
 import {Provider} from "react-redux";
 import store from "./Components/Redux/redux-store";

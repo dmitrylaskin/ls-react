@@ -33,17 +33,31 @@
     padding: 20px 15px 20px 25px;
 }
 .cardDate {
-    background-color: transparent;
+    color: #b7b6b6;
     width: 50px;
-
-
 }
 .cardNumber {
     background-color: transparent;
-    height: 60%;
     font-size: 24px;
     word-spacing: 15px;
 }
 .cardIcons {
     height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardHolder {
+    color: #b7b6b6;
+    width: 255px;
+    overflow: hidden;
+    text-align: right;
+}
+
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+    color: black !important;
 }
