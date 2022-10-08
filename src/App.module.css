@@ -38,6 +38,6 @@
 
 }
 .mainSection {
-    height: 100vh;
+    height: calc(100vh - 102px);
     background: url("./assets/img/bg_map.png");
 }
